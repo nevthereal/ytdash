@@ -6,8 +6,12 @@ export default {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 
 	theme: {
-		extend: {}
+		extend: {
+			colors: {
+				abyss: '#1e1e1e'
+			}
+		}
 	},
 
-	plugins: [typography, forms]
+	plugins: [typography]
 } satisfies Config;
