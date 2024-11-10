@@ -22,7 +22,10 @@ export const project = pgTable('project', {
 	date: timestamp('date'),
 	status: statusEnum('status'),
 	url: text('url'),
-	archived: boolean('archived')
+	archived: boolean('archived'),
+	userId: text('user_id')
+		.notNull()
+		.references(() => user.id)
 });
 
 export type Session = typeof session.$inferSelect;

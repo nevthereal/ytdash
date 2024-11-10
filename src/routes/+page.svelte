@@ -1,6 +1,10 @@
-<script lang="ts"></script>
+<script lang="ts">
+</script>
 
-<form action="/?add">
-	<label for="project"></label>
-	<input type="text" name="project" placeholder="Project name" class="text-lg" />
+<h1 class="mb-4 text-2xl font-bold">Add a project</h1>
+<form action="/?add" class="mx-auto max-w-[50%]">
+	<div class="flex flex-col gap-2">
+		<label for="project">Project name</label>
+		<input type="text" name="project" placeholder="Project name" class="input input-primary" />
+	</div>
 </form>

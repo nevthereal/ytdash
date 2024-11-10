@@ -1,17 +1,11 @@
-import forms from '@tailwindcss/forms';
 import typography from '@tailwindcss/typography';
 import type { Config } from 'tailwindcss';
+import daisyui from 'daisyui';
 
 export default {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
-
-	theme: {
-		extend: {
-			colors: {
-				abyss: '#1e1e1e'
-			}
-		}
+	daisyui: {
+		themes: ['dim']
 	},
-
-	plugins: [typography]
+	plugins: [typography, daisyui]
 } satisfies Config;
