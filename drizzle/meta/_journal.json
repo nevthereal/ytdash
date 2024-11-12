@@ -8,6 +8,13 @@
       "when": 1730739421988,
       "tag": "0000_safe_kitty_pryde",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1731394659582,
+      "tag": "0001_petite_viper",
+      "breakpoints": true
     }
   ]
 }
