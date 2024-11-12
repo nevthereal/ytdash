@@ -25,7 +25,15 @@ export const project = pgTable('project', {
 	archived: boolean('archived'),
 	userId: text('user_id')
 		.notNull()
-		.references(() => user.id)
+		.references(() => user.id, { onDelete: 'cascade' })
+});
+
+export const note = pgTable('note', {
+	id: text('id').primaryKey(),
+	content: text('content').notNull(),
+	projectId: text('project_id')
+		.references(() => project.id, { onDelete: 'cascade' })
+		.notNull()
 });
 
 export type Session = typeof session.$inferSelect;
