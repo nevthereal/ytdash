@@ -15,6 +15,20 @@
       "when": 1731394659582,
       "tag": "0001_petite_viper",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1731439423893,
+      "tag": "0002_robust_ego",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1731439927893,
+      "tag": "0003_funny_black_tarantula",
+      "breakpoints": true
     }
   ]
 }

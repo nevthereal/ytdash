@@ -4,6 +4,10 @@ import { sha256 } from '@oslojs/crypto/sha2';
 import { encodeBase32LowerCase, encodeHexLowerCase } from '@oslojs/encoding';
 import { db } from '$lib/server/db';
 import * as table from '$lib/server/db/schema';
+import { GitHub } from 'arctic';
+import { GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET } from '$env/static/private';
+
+export const github = new GitHub(GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET, null);
 
 const DAY_IN_MS = 1000 * 60 * 60 * 24;
 
@@ -22,7 +26,7 @@ export async function createSession(token: string, userId: string) {
 		userId,
 		expiresAt: new Date(Date.now() + DAY_IN_MS * 30)
 	};
-	await db.insert(table.session).values(session);
+	await db.insert(table.sessionsTable).values(session);
 	return session;
 }
 
@@ -31,12 +35,12 @@ export async function validateSessionToken(token: string) {
 	const [result] = await db
 		.select({
 			// Adjust user table here to tweak returned data
-			user: { id: table.user.id, username: table.user.username },
-			session: table.session
+			user: { id: table.usersTable.id, username: table.usersTable.username },
+			session: table.sessionsTable
 		})
-		.from(table.session)
-		.innerJoin(table.user, eq(table.session.userId, table.user.id))
-		.where(eq(table.session.id, sessionId));
+		.from(table.sessionsTable)
+		.innerJoin(table.usersTable, eq(table.sessionsTable.userId, table.usersTable.id))
+		.where(eq(table.sessionsTable.id, sessionId));
 
 	if (!result) {
 		return { session: null, user: null };
@@ -45,7 +49,7 @@ export async function validateSessionToken(token: string) {
 
 	const sessionExpired = Date.now() >= session.expiresAt.getTime();
 	if (sessionExpired) {
-		await db.delete(table.session).where(eq(table.session.id, session.id));
+		await db.delete(table.sessionsTable).where(eq(table.sessionsTable.id, session.id));
 		return { session: null, user: null };
 	}
 
@@ -53,9 +57,9 @@ export async function validateSessionToken(token: string) {
 	if (renewSession) {
 		session.expiresAt = new Date(Date.now() + DAY_IN_MS * 30);
 		await db
-			.update(table.session)
+			.update(table.sessionsTable)
 			.set({ expiresAt: session.expiresAt })
-			.where(eq(table.session.id, session.id));
+			.where(eq(table.sessionsTable.id, session.id));
 	}
 
 	return { session, user };
@@ -64,7 +68,7 @@ export async function validateSessionToken(token: string) {
 export type SessionValidationResult = Awaited<ReturnType<typeof validateSessionToken>>;
 
 export async function invalidateSession(sessionId: string) {
-	await db.delete(table.session).where(eq(table.session.id, sessionId));
+	await db.delete(table.sessionsTable).where(eq(table.sessionsTable.id, sessionId));
 }
 
 export function setSessionTokenCookie(event: RequestEvent, token: string, expiresAt: Date) {
