@@ -1,9 +1,12 @@
 <script lang="ts">
+	import Loading from '$lib/components/Loading.svelte';
 	import { superForm } from 'sveltekit-superforms';
 
 	let { data } = $props();
 
 	const { form, enhance } = superForm(data.addForm);
+
+	const projectsPromise = data.projects;
 </script>
 
 <svelte:head>
@@ -23,3 +26,13 @@
 		/>
 	</div>
 </form>
+
+{#await projectsPromise}
+	<Loading thing="projects" />
+{:then projects}
+	<ul>
+		{#each projects as project}
+			<a href={`/projects/${project.id}`}>{project.title}</a>
+		{/each}
+	</ul>
+{/await}

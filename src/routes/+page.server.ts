@@ -6,13 +6,15 @@ import { redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 import { fail, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
+import { eq } from 'drizzle-orm';
 
 export const load: PageServerLoad = async ({ locals }) => {
-	checkUser(locals);
+	const user = checkUser(locals);
 
 	const addForm = await superValidate(zod(zAddProject));
+	const projects = db.select().from(projectsTable).where(eq(projectsTable.userId, user.id));
 
-	return { addForm };
+	return { addForm, projects };
 };
 
 export const actions: Actions = {
