@@ -1,7 +1,9 @@
 <script lang="ts">
+	import H1 from '$lib/components/typography/H1.svelte';
+
 	let { data } = $props();
 
 	const project = data.project;
 </script>
 
-<h1>{project.title}</h1>
+<H1>{project.title}</H1>

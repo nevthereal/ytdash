@@ -1,6 +1,12 @@
 import { generateRandomString } from '@oslojs/crypto/random';
 import { redirect } from '@sveltejs/kit';
 import type { RandomReader } from '@oslojs/crypto/random';
+import { type ClassValue, clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+
+export function cn(...inputs: ClassValue[]) {
+	return twMerge(clsx(inputs));
+}
 
 export const random: RandomReader = {
 	read(bytes: Uint8Array): void {
