@@ -1,4 +1,4 @@
-import { boolean, integer, pgEnum, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
+import { boolean, date, integer, pgEnum, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
 
 export const statusEnum = pgEnum('status', ['To-do', 'In progress', 'Completed']);
 
@@ -20,7 +20,7 @@ export const projectsTable = pgTable('project', {
 	id: text('id').primaryKey(),
 	title: text('title').notNull(),
 	info: text('info'),
-	date: timestamp('date'),
+	date: date('date'),
 	status: statusEnum('status').default('To-do'),
 	url: text('url'),
 	archived: boolean('archived'),
@@ -40,3 +40,5 @@ export const notesTable = pgTable('note', {
 export type Session = typeof sessionsTable.$inferSelect;
 
 export type User = typeof usersTable.$inferSelect;
+
+export type Project = typeof projectsTable.$inferSelect;

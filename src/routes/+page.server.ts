@@ -31,8 +31,6 @@ export const actions: Actions = {
 
 		const form = await superValidate(request, zod(zAddProject));
 
-		console.log(form.valid, form.data);
-
 		if (!form.valid) return fail(400, { form });
 
 		const createdProject = await db
@@ -41,7 +39,7 @@ export const actions: Actions = {
 				id: randomId(6),
 				title: form.data.title,
 				userId: user.id,
-				date: form.data.date
+				date: form.data.date?.toString()
 			})
 			.returning();
 

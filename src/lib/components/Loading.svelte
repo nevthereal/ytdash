@@ -2,4 +2,4 @@
 	let { thing }: { thing: string } = $props();
 </script>
 
-<p class="font-mono text-lg">Loading {thing.toLowerCase()}...</p>
+<p class="text-center font-mono text-lg">Loading {thing.toLowerCase()}...</p>

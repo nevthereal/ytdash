@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Loading from '$lib/components/Loading.svelte';
+	import ProjectCard from '$lib/components/ProjectCard.svelte';
 	import Spinner from '$lib/components/Spinner.svelte';
 	import H1 from '$lib/components/typography/H1.svelte';
 	import { cn } from '$lib/utils.js';
@@ -16,12 +17,11 @@
 	<title>ytdash home</title>
 </svelte:head>
 
-<div class="flex flex-col gap-16">
+<div class="mx-auto mt-16 flex max-w-4xl flex-col gap-12">
 	<section>
 		<H1>Add a project</H1>
-		<form use:enhance action="?/add" method="POST" class="mx-auto max-w-[50%]">
+		<form use:enhance action="?/add" method="POST" class="mx-auto">
 			<div class="flex flex-col gap-2">
-				<label for="project">Project name</label>
 				<input
 					bind:value={$form.title}
 					type="text"
@@ -36,14 +36,14 @@
 		</form>
 	</section>
 
-	<section>
+	<section class="">
 		<H1>Ongoing projects</H1>
 		{#await projectsPromise}
 			<Loading thing="projects" />
 		{:then projects}
 			<ul class="flex flex-col gap-4">
 				{#each projects as project}
-					<a href={`/projects/${project.id}`}>{project.title}</a>
+					<ProjectCard {project} />
 				{/each}
 			</ul>
 		{/await}
