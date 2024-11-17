@@ -45,6 +45,7 @@
 		"@neondatabase/serverless": "^0.9.4",
 		"@oslojs/crypto": "^1.0.1",
 		"@oslojs/encoding": "^1.1.0",
+		"@xyflow/svelte": "^0.1.24",
 		"arctic": "^2.2.2",
 		"clsx": "^2.1.1",
 		"dayjs": "^1.11.13",

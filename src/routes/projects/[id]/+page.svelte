@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
+	import Menu from '$lib/components/Menu.svelte';
 	import H1 from '$lib/components/typography/H1.svelte';
 
 	let { data } = $props();
