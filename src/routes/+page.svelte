@@ -4,11 +4,16 @@
 	import Spinner from '$lib/components/Spinner.svelte';
 	import H1 from '$lib/components/typography/H1.svelte';
 	import { cn } from '$lib/utils.js';
+	import { toast } from 'svelte-sonner';
 	import { superForm } from 'sveltekit-superforms';
 
 	let { data } = $props();
 
-	const { form, enhance, delayed } = superForm(data.addForm);
+	const { form, enhance, delayed } = superForm(data.addForm, {
+		onSubmit: ({ formData }) => {
+			toast(`Created ${formData.get('title')}`);
+		}
+	});
 
 	const projectsPromise = data.projects;
 </script>
