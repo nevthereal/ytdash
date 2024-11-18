@@ -8,13 +8,15 @@
 <Toaster
 	toastOptions={{
 		classes: {
-			toast: 'bg-base-200 border border-base-300 rounded-box p-4',
+			toast:
+				'bg-base-200 border border-base-300 rounded-box p-6 right-0 absolute max-w-2xl flex gap-4 items-center',
 			title: 'text-base-content text-lg',
 			description: 'text-base-content',
 			actionButton: 'btn btn-xs btn-primary',
 			cancelButton: 'btn btn-xs btn-warning',
 			closeButton: 'btn btn-xs btn-ghost'
-		}
+		},
+		unstyled: true
 	}}
 />
 
