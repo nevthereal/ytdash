@@ -10,28 +10,20 @@
 	}
 
 	let { children, actions }: Props = $props();
-
-	let shown = $state(false);
 </script>
 
-<div class="flex">
-	<button onclick={() => (shown = !shown)}>
-		{@render children()}
-	</button>
-	{#if shown}
-		<div
-			transition:fade={{ duration: 200, easing: quadInOut }}
-			class="absolute ml-6 rounded-box border-2 border-base-200 bg-base-100 p-4"
-		>
-			<ul class="flex flex-col gap-2">
-				{#each actions as menuItem}
-					<button
-						onclick={menuItem.action}
-						class="flex items-center justify-between gap-4 p-2 text-left text-lg"
-						><i class={menuItem.icon}></i><span class="mr-auto">{menuItem.content}</span></button
-					>
-				{/each}
-			</ul>
-		</div>
-	{/if}
-</div>
+<details class="dropdown dropdown-right">
+	<summary class="btn m-1">{@render children()}</summary>
+	<ul
+		transition:fade={{ duration: 200, easing: quadInOut }}
+		class="menu dropdown-content z-[1] w-52 rounded-box border-2 border-base-300 bg-base-200 p-2 shadow"
+	>
+		{#each actions as menuItem}
+			<button
+				onclick={menuItem.action}
+				class="flex items-center justify-between gap-4 p-2 text-left text-lg"
+				><i class={menuItem.icon}></i><span class="mr-auto">{menuItem.content}</span></button
+			>
+		{/each}
+	</ul>
+</details>
