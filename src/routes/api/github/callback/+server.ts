@@ -29,7 +29,8 @@ export async function GET(event: RequestEvent): Promise<Response> {
 	} catch (e) {
 		// Invalid code or client credentials
 		return new Response(null, {
-			status: 400
+			status: 400,
+			statusText: String(e)
 		});
 	}
 	const githubUserResponse = await fetch('https://api.github.com/user', {
@@ -60,7 +61,7 @@ export async function GET(event: RequestEvent): Promise<Response> {
 	}
 
 	// TODO: Replace this with your own DB query.
-	const newUser = await db
+	const [newUser] = await db
 		.insert(usersTable)
 		.values({
 			id: randomId(16),
@@ -70,7 +71,7 @@ export async function GET(event: RequestEvent): Promise<Response> {
 		.returning({ id: usersTable.id });
 
 	const sessionToken = generateSessionToken();
-	const session = await createSession(sessionToken, newUser[0].id);
+	const session = await createSession(sessionToken, newUser.id);
 	setSessionTokenCookie(event, sessionToken, session.expiresAt);
 
 	return new Response(null, {

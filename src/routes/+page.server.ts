@@ -33,7 +33,7 @@ export const actions: Actions = {
 
 		if (!form.valid) return fail(400, { form });
 
-		const createdProject = await db
+		const [projectId] = await db
 			.insert(projectsTable)
 			.values({
 				id: randomId(6),
@@ -43,6 +43,6 @@ export const actions: Actions = {
 			})
 			.returning();
 
-		return redirect(302, `/projects/${createdProject[0].id}`);
+		return redirect(302, `/projects/${projectId.id}`);
 	}
 };

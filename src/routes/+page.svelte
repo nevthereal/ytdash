@@ -9,13 +9,13 @@
 
 	let { data } = $props();
 
+	const projectsPromise = data.projects;
+
 	const { form, enhance, delayed } = superForm(data.addForm, {
-		onSubmit: ({ formData }) => {
-			toast(`Created ${formData.get('title')}`);
+		onUpdated: ({ form }) => {
+			if (form.valid) toast(`Created ${form.data.title}`);
 		}
 	});
-
-	const projectsPromise = data.projects;
 </script>
 
 <svelte:head>
