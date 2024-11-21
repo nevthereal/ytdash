@@ -7,8 +7,8 @@
 </script>
 
 <div class="rounded-box border-2 border-base-300 bg-base-200 p-8">
-	<div class="flex items-center justify-between">
-		<a href={`projects/${project.id}`} class="group">
+	<div class="flex items-center">
+		<a href={`projects/${project.id}`} class="group flex-grow">
 			<h1
 				class="mb-2 text-2xl font-bold no-underline duration-300 ease-in-out group-hover:underline"
 			>
