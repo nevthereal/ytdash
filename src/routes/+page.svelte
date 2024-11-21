@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Loading from '$lib/components/Loading.svelte';
+	import Loading from '$lib/components/typography/Loading.svelte';
 	import ProjectCard from '$lib/components/ProjectCard.svelte';
 	import Spinner from '$lib/components/Spinner.svelte';
 	import H1 from '$lib/components/typography/H1.svelte';
@@ -23,35 +23,40 @@
 	<title>ytdash home</title>
 </svelte:head>
 
-<div class="mx-auto mt-16 flex max-w-4xl flex-col gap-12">
-	<section>
-		<H1>Add a project</H1>
-		<form use:enhance action="?/add" method="POST" class="mx-auto">
-			<div class="flex flex-col gap-2">
-				<input
-					bind:value={$form.title}
-					type="text"
-					name="title"
-					placeholder="Project name"
-					class="input input-primary"
-				/>
-				<button class={cn('btn', !$delayed ? 'btn-primary' : 'btn-disabled')}
-					>Add {#if $delayed}<Spinner />{/if}</button
-				>
-			</div>
-		</form>
-	</section>
+<section>
+	<H1>Add a project</H1>
+	<form use:enhance action="?/add" method="POST" class="mx-auto">
+		<div class="flex flex-col gap-2">
+			<input
+				bind:value={$form.title}
+				type="text"
+				name="title"
+				placeholder="Project name"
+				class="input input-primary"
+			/>
+			<button class={cn('btn ml-auto', !$delayed ? 'btn-primary' : 'btn-disabled')}
+				>Add Project {$form.title}
+				{#if $delayed}<Spinner />{/if}</button
+			>
+		</div>
+	</form>
+</section>
 
-	<section class="">
-		<H1>Ongoing projects</H1>
-		{#await projectsPromise}
-			<Loading thing="projects" />
-		{:then projects}
-			<ul class="flex flex-col gap-4">
-				{#each projects as project}
-					<ProjectCard {project} />
-				{/each}
-			</ul>
-		{/await}
-	</section>
-</div>
+<section class="mt-12">
+	{#await projectsPromise}
+		<Loading thing="projects" />
+	{:then projects}
+		<H1>
+			{#if projects.length != 0}
+				<span>Ongoing projects</span>
+			{:else}
+				<span>No projects. Create one above!</span>
+			{/if}
+		</H1>
+		<ul class="flex flex-col gap-4">
+			{#each projects as project}
+				<ProjectCard {project} />
+			{/each}
+		</ul>
+	{/await}
+</section>

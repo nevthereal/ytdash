@@ -1,4 +1,13 @@
-import { boolean, date, integer, pgEnum, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
+import {
+	boolean,
+	date,
+	integer,
+	pgEnum,
+	pgTable,
+	serial,
+	text,
+	timestamp
+} from 'drizzle-orm/pg-core';
 
 export const statusEnum = pgEnum('status', ['To-do', 'In progress', 'Completed']);
 
@@ -26,11 +35,12 @@ export const projectsTable = pgTable('project', {
 	archived: boolean(),
 	userId: text()
 		.notNull()
-		.references(() => usersTable.id, { onDelete: 'cascade' })
+		.references(() => usersTable.id, { onDelete: 'cascade' }),
+	createdAt: timestamp().$defaultFn(() => new Date())
 });
 
 export const notesTable = pgTable('note', {
-	id: text().primaryKey(),
+	id: serial().primaryKey(),
 	content: text().notNull(),
 	projectId: text()
 		.references(() => projectsTable.id, { onDelete: 'cascade' })

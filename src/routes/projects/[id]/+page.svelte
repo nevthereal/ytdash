@@ -1,4 +1,5 @@
 <script lang="ts">
+	import BigH from '$lib/components/typography/BigH.svelte';
 	import H1 from '$lib/components/typography/H1.svelte';
 
 	let { data } = $props();
@@ -12,10 +13,11 @@
 	});
 </script>
 
-<H1>{project.title}</H1>
+<H1>Project:</H1>
+<BigH>{project.title}</BigH>
 <div>
 	{#if !project.description}
-		<button class="btn" onclick={() => descModal.showModal()}>open modal</button>
+		<button class="underline" onclick={() => descModal.showModal()}>Edit project data</button>
 		<dialog id="description_modal" class="modal">
 			<div class="modal-box">
 				<h3 class="text-lg font-bold">Hello!</h3>

@@ -24,8 +24,9 @@
 <div class="mx-auto max-w-6xl">
 	<nav class="rounded-b-xl bg-base-300 p-8">
 		<a href="/" class="text-4xl font-black text-primary">overview</a>
+		<a href="/projects">projects</a>
 	</nav>
-	<main class="my-4">
+	<main class="mx-auto my-4 mt-16 max-w-4xl">
 		{@render children()}
 	</main>
 </div>
