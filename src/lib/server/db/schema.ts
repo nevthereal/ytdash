@@ -3,36 +3,36 @@ import { boolean, date, integer, pgEnum, pgTable, text, timestamp } from 'drizzl
 export const statusEnum = pgEnum('status', ['To-do', 'In progress', 'Completed']);
 
 export const usersTable = pgTable('user', {
-	id: text('id').primaryKey(),
-	username: text('username').notNull(),
-	gitHubId: integer('github_id').notNull()
+	id: text().primaryKey(),
+	username: text().notNull(),
+	githubId: integer().notNull()
 });
 
 export const sessionsTable = pgTable('session', {
-	id: text('id').primaryKey(),
-	userId: text('user_id')
+	id: text().primaryKey(),
+	userId: text()
 		.notNull()
 		.references(() => usersTable.id, { onDelete: 'cascade' }),
-	expiresAt: timestamp('expires_at', { withTimezone: true, mode: 'date' }).notNull()
+	expiresAt: timestamp({ withTimezone: true, mode: 'date' }).notNull()
 });
 
 export const projectsTable = pgTable('project', {
-	id: text('id').primaryKey(),
-	title: text('title').notNull(),
-	info: text('info'),
-	date: date('date'),
-	status: statusEnum('status').default('To-do'),
-	url: text('url'),
-	archived: boolean('archived'),
-	userId: text('user_id')
+	id: text().primaryKey(),
+	title: text().notNull(),
+	description: text(),
+	date: date(),
+	status: statusEnum().default('To-do'),
+	url: text(),
+	archived: boolean(),
+	userId: text()
 		.notNull()
 		.references(() => usersTable.id, { onDelete: 'cascade' })
 });
 
 export const notesTable = pgTable('note', {
-	id: text('id').primaryKey(),
-	content: text('content').notNull(),
-	projectId: text('project_id')
+	id: text().primaryKey(),
+	content: text().notNull(),
+	projectId: text()
 		.references(() => projectsTable.id, { onDelete: 'cascade' })
 		.notNull()
 });

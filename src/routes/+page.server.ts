@@ -2,11 +2,11 @@ import { db } from '$lib/server/db';
 import { projectsTable } from '$lib/server/db/schema';
 import { checkUser, randomId } from '$lib/utils';
 import { zAddProject } from '$lib/zod';
-import { redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 import { fail, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import { eq, and, or } from 'drizzle-orm';
+import { redirect } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async ({ locals }) => {
 	const user = checkUser(locals);
@@ -33,7 +33,7 @@ export const actions: Actions = {
 
 		if (!form.valid) return fail(400, { form });
 
-		const [projectId] = await db
+		const [{ id }] = await db
 			.insert(projectsTable)
 			.values({
 				id: randomId(6),
@@ -43,6 +43,6 @@ export const actions: Actions = {
 			})
 			.returning();
 
-		return redirect(302, `/projects/${projectId.id}`);
+		return redirect(302, `/projects/${id}`);
 	}
 };

@@ -16,10 +16,10 @@
 			</h1>
 			<div class="flex items-center gap-6">
 				<p>
-					{#if project.info}
-						{project.info}
+					{#if project.description}
+						{project.description}
 					{:else}
-						<span class="text-base-content/60">No info added</span>
+						<span class="text-base-content/60">No description added</span>
 					{/if}
 				</p>
 				<p>

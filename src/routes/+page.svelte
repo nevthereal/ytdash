@@ -3,7 +3,7 @@
 	import ProjectCard from '$lib/components/ProjectCard.svelte';
 	import Spinner from '$lib/components/Spinner.svelte';
 	import H1 from '$lib/components/typography/H1.svelte';
-	import { cn } from '$lib/utils.js';
+	import { cn } from '$lib/utils';
 	import { toast } from 'svelte-sonner';
 	import { superForm } from 'sveltekit-superforms';
 
@@ -12,8 +12,9 @@
 	const projectsPromise = data.projects;
 
 	const { form, enhance, delayed } = superForm(data.addForm, {
-		onUpdated: ({ form }) => {
-			if (form.valid) toast(`Created ${form.data.title}`);
+		invalidateAll: false,
+		onSubmit: ({ formData }) => {
+			toast(`Trying to create ${formData.get('title')}`);
 		}
 	});
 </script>
