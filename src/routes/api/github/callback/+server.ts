@@ -6,7 +6,7 @@ import { randomId } from '$lib/utils';
 
 import type { RequestEvent } from '@sveltejs/kit';
 import type { OAuth2Tokens } from 'arctic';
-import { eq } from 'drizzle-orm';
+import { eq } from 'drizzle-orm/expressions';
 
 export async function GET(event: RequestEvent): Promise<Response> {
 	const code = event.url.searchParams.get('code');
@@ -45,7 +45,7 @@ export async function GET(event: RequestEvent): Promise<Response> {
 
 	// TODO: Replace this with your own DB query.
 	const existingUser = await db.query.usersTable.findFirst({
-		where: eq(usersTable.gitHubId, githubUserId)
+		where: eq(usersTable.githubId, githubUserId)
 	});
 
 	if (existingUser) {
@@ -65,7 +65,7 @@ export async function GET(event: RequestEvent): Promise<Response> {
 		.insert(usersTable)
 		.values({
 			id: randomId(16),
-			gitHubId: githubUserId,
+			githubId: githubUserId,
 			username: githubUsername
 		})
 		.returning({ id: usersTable.id });

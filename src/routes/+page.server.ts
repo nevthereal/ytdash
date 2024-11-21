@@ -5,7 +5,7 @@ import { zAddProject } from '$lib/zod';
 import type { Actions, PageServerLoad } from './$types';
 import { fail, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
-import { eq, and, or } from 'drizzle-orm';
+import { eq, and, or } from 'drizzle-orm/expressions';
 import { redirect } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async ({ locals }) => {
