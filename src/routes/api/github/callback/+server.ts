@@ -6,7 +6,7 @@ import { randomId } from '$lib/utils';
 
 import type { RequestEvent } from '@sveltejs/kit';
 import type { OAuth2Tokens } from 'arctic';
-import { eq } from 'drizzle-orm/expressions';
+import { eq } from 'drizzle-orm';
 
 export async function GET(event: RequestEvent): Promise<Response> {
 	const code = event.url.searchParams.get('code');

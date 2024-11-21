@@ -1,6 +1,6 @@
 import { db } from '$lib/server/db';
 import { checkUser } from '$lib/utils';
-import { eq } from 'drizzle-orm/expressions';
+import { eq } from 'drizzle-orm';
 import type { PageServerLoad } from './$types';
 import { projectsTable } from '$lib/server/db/schema';
 import { error } from '@sveltejs/kit';
