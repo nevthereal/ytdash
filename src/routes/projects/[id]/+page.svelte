@@ -6,24 +6,28 @@
 	let { data } = $props();
 
 	const project = data.project;
+
+	let descModal: HTMLDialogElement;
+
+	$effect(() => {
+		descModal = document.getElementById('description_modal') as HTMLDialogElement;
+	});
 </script>
 
 <H1>{project.title}</H1>
-<h3>
+<div>
 	{#if !project.description}
-		<div class="drawer">
-			<input id="my-drawer" type="checkbox" class="drawer-toggle" />
-			<div class="drawer-content">
-				<label for="my-drawer" class="underline">Add project description</label>
+		<button class="btn" onclick={() => descModal.showModal()}>open modal</button>
+		<dialog id="description_modal" class="modal">
+			<div class="modal-box">
+				<h3 class="text-lg font-bold">Hello!</h3>
+				<p class="py-4">Press ESC key or click outside to close</p>
 			</div>
-			<div class="drawer-side">
-				<label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
-				<ul class="menu min-h-full w-80 bg-base-200 p-4 text-base-content">
-					<form action="?/addInfo"></form>
-				</ul>
-			</div>
-		</div>
+			<form method="dialog" class="modal-backdrop">
+				<button>close</button>
+			</form>
+		</dialog>
 	{:else}
-		{project.description}
+		<p>{project.description}</p>
 	{/if}
-</h3>
+</div>
