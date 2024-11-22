@@ -12,6 +12,6 @@
 	<Loading thing={'Projects'} />
 {:then projects}
 	{#each projects as project}
-		<div>{project.title}</div>
+		<a href={`/projects/${project.id}`}>{project.title}</a>
 	{/each}
 {/await}

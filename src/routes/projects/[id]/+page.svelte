@@ -15,19 +15,20 @@
 
 <H1>Project:</H1>
 <BigH>{project.title}</BigH>
+
+{#if !project.description}
+	<p>{project.description}</p>
+{/if}
+
 <div>
-	{#if !project.description}
-		<button class="underline" onclick={() => descModal.showModal()}>Edit project data</button>
-		<dialog id="description_modal" class="modal">
-			<div class="modal-box">
-				<h3 class="text-lg font-bold">Hello!</h3>
-				<p class="py-4">Press ESC key or click outside to close</p>
-			</div>
-			<form method="dialog" class="modal-backdrop">
-				<button>close</button>
-			</form>
-		</dialog>
-	{:else}
-		<p>{project.description}</p>
-	{/if}
+	<button class="underline" onclick={() => descModal.showModal()}>Edit project data</button>
+	<dialog id="description_modal" class="modal">
+		<div class="modal-box">
+			<H1>Edit project</H1>
+			<form action="?/editProject"></form>
+		</div>
+		<form method="dialog" class="modal-backdrop">
+			<button>close</button>
+		</form>
+	</dialog>
 </div>
