@@ -11,7 +11,7 @@
 
 	const projectsPromise = data.projects;
 
-	const { form, enhance, delayed } = superForm(data.addForm, {
+	const { form, enhance, delayed, constraints } = superForm(data.addForm, {
 		invalidateAll: false,
 		onSubmit: ({ formData }) => {
 			toast(`Trying to create ${formData.get('title')}`);
@@ -33,6 +33,7 @@
 				name="title"
 				placeholder="Project name"
 				class="input input-primary"
+				{...$constraints.title}
 			/>
 			<button class={cn('btn ml-auto', !$delayed ? 'btn-primary' : 'btn-disabled')}
 				>Add Project {$form.title}

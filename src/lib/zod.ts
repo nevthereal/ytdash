@@ -1,14 +1,13 @@
 import { z } from 'zod';
 
-const title = z.string().min(3).max(16);
+const title = z.string().min(3).max(24);
 
 export const zAddProject = z.object({
-	title,
-	date: z.date().optional()
+	title
 });
 
 export const zEditProject = z.object({
 	title,
 	date: z.date().optional(),
-	description: z.string().min(5).optional()
+	description: z.string().min(3).nullable().optional()
 });

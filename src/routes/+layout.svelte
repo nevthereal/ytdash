@@ -22,7 +22,7 @@
 />
 
 <div class="mx-auto max-w-6xl">
-	<nav class="rounded-b-xl bg-base-300 p-8">
+	<nav class="flex items-center justify-between rounded-b-xl bg-base-300 p-8">
 		<a href="/" class="text-4xl font-black text-primary">overview</a>
 		<a href="/projects">projects</a>
 	</nav>
