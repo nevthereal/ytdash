@@ -8,6 +8,7 @@
 	let { data } = $props();
 
 	const project = data.project;
+	const notes = data.notes;
 
 	let descModal: HTMLDialogElement;
 
@@ -26,7 +27,7 @@
 	$form.description = project.description;
 </script>
 
-<div>
+<section>
 	<H1>Project:</H1>
 	<BigH>{project.title}</BigH>
 
@@ -38,7 +39,19 @@
 
 		<button class="underline" onclick={() => descModal.showModal()}>Edit project data</button>
 	</div>
-</div>
+</section>
+
+<section class="mt-6 border-t border-base-content/80 pt-6">
+	<H1>Notes:</H1>
+	<form action="?/addNote">
+		<input type="text" placeholder="Note" class="input input-primary" />
+	</form>
+	<div>
+		{#each notes as note}
+			<p>{note.content}</p>
+		{/each}
+	</div>
+</section>
 
 <dialog bind:this={descModal} class="modal">
 	<div class="modal-box">

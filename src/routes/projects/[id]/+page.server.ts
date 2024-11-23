@@ -1,8 +1,8 @@
 import { db } from '$lib/server/db';
 import { checkUser } from '$lib/utils';
-import { eq } from 'drizzle-orm';
+import { desc, eq } from 'drizzle-orm';
 import type { Actions, PageServerLoad } from './$types';
-import { projectsTable } from '$lib/server/db/schema';
+import { notesTable, projectsTable } from '$lib/server/db/schema';
 import { error, fail } from '@sveltejs/kit';
 import { superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
@@ -23,7 +23,12 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 		error(403, { message: 'This is not your project' });
 	}
 
-	return { project: qProject, form };
+	const notes = await db.query.notesTable.findMany({
+		where: eq(notesTable.projectId, qProject.id),
+		orderBy: desc(notesTable.createdAt)
+	});
+
+	return { project: qProject, form, notes };
 };
 
 export const actions: Actions = {

@@ -44,7 +44,8 @@ export const notesTable = pgTable('note', {
 	content: text().notNull(),
 	projectId: text()
 		.references(() => projectsTable.id, { onDelete: 'cascade' })
-		.notNull()
+		.notNull(),
+	createdAt: timestamp().$defaultFn(() => new Date())
 });
 
 export type Session = typeof sessionsTable.$inferSelect;
