@@ -36,7 +36,7 @@
 				{...$constraints.title}
 			/>
 			<button class={cn('btn ml-auto', !$delayed ? 'btn-primary' : 'btn-disabled')}
-				>Add Project {$form.title}
+				>Create Project {$form.title}
 				{#if $delayed}<Spinner />{/if}</button
 			>
 		</div>

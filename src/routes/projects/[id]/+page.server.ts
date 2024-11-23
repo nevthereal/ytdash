@@ -1,17 +1,18 @@
 import { db } from '$lib/server/db';
-import { checkUser } from '$lib/utils';
+import { checkUser, randomId } from '$lib/utils';
 import { desc, eq } from 'drizzle-orm';
 import type { Actions, PageServerLoad } from './$types';
 import { notesTable, projectsTable } from '$lib/server/db/schema';
 import { error, fail } from '@sveltejs/kit';
 import { superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
-import { zEditProject } from '$lib/zod';
+import { zAddNote, zEditProject } from '$lib/zod';
 
 export const load: PageServerLoad = async ({ locals, params }) => {
 	const user = checkUser(locals);
 
-	const form = await superValidate(zod(zEditProject));
+	const editProjectForm = await superValidate(zod(zEditProject));
+	const addNoteForm = await superValidate(zod(zAddNote));
 
 	const qProject = await db.query.projectsTable.findFirst({
 		where: eq(projectsTable.id, params.id)
@@ -28,7 +29,7 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 		orderBy: desc(notesTable.createdAt)
 	});
 
-	return { project: qProject, form, notes };
+	return { project: qProject, editProjectForm, notes, addNoteForm };
 };
 
 export const actions: Actions = {
@@ -52,5 +53,16 @@ export const actions: Actions = {
 		});
 
 		return { form };
+	},
+	addNote: async ({ request, params }) => {
+		const form = await superValidate(request, zod(zAddNote));
+
+		if (!form.valid) return fail(400, { form });
+
+		await db.insert(notesTable).values({
+			content: form.data.content,
+			projectId: params.id,
+			id: randomId(16)
+		});
 	}
 };

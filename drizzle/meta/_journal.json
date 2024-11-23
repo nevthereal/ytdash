@@ -50,6 +50,20 @@
       "when": 1732366251663,
       "tag": "0006_fresh_nightcrawler",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1732389250437,
+      "tag": "0007_foamy_mysterio",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1732389475244,
+      "tag": "0008_mysterious_unus",
+      "breakpoints": true
     }
   ]
 }

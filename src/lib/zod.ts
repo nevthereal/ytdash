@@ -11,3 +11,7 @@ export const zEditProject = z.object({
 	date: z.date().optional(),
 	description: z.string().min(3).nullable().optional()
 });
+
+export const zAddNote = z.object({
+	content: z.string().min(3)
+});

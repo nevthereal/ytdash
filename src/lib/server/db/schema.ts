@@ -36,16 +36,20 @@ export const projectsTable = pgTable('project', {
 	userId: text()
 		.notNull()
 		.references(() => usersTable.id, { onDelete: 'cascade' }),
-	createdAt: timestamp().$defaultFn(() => new Date())
+	createdAt: timestamp()
+		.$defaultFn(() => new Date())
+		.notNull()
 });
 
 export const notesTable = pgTable('note', {
-	id: serial().primaryKey(),
+	id: text().primaryKey(),
 	content: text().notNull(),
 	projectId: text()
 		.references(() => projectsTable.id, { onDelete: 'cascade' })
 		.notNull(),
-	createdAt: timestamp().$defaultFn(() => new Date())
+	createdAt: timestamp()
+		.$defaultFn(() => new Date())
+		.notNull()
 });
 
 export type Session = typeof sessionsTable.$inferSelect;

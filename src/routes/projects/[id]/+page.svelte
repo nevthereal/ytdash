@@ -8,11 +8,15 @@
 	let { data } = $props();
 
 	const project = data.project;
-	const notes = data.notes;
+	const notes = $derived(data.notes);
 
 	let descModal: HTMLDialogElement;
 
-	const { form, enhance, constraints } = superForm(data.form, {
+	const {
+		form: epForm,
+		enhance: epEnhance,
+		constraints: epConstraints
+	} = superForm(data.editProjectForm, {
 		onSubmit: () => {
 			descModal.close();
 			toast(`Updating ${project.title}`);
@@ -20,15 +24,19 @@
 		}
 	});
 
-	const date = dateProxy(form, 'date', { format: 'date', empty: 'undefined' });
+	const date = dateProxy(epForm, 'date', { format: 'date', empty: 'undefined' });
 
 	$date = dayjs(project.date).format('YYYY-MM-DD');
-	$form.title = project.title;
-	$form.description = project.description;
+	$epForm.title = project.title;
+	$epForm.description = project.description;
+
+	const { form: anForm, enhance: anEnhance } = superForm(data.addNoteForm, {
+		invalidateAll: true
+	});
 </script>
 
 <section>
-	<H1>Project:</H1>
+	<H1>Project overview:</H1>
 	<BigH>{project.title}</BigH>
 
 	<div class="flex gap-2">
@@ -41,10 +49,18 @@
 	</div>
 </section>
 
-<section class="mt-6 border-t border-base-content/80 pt-6">
+<section class="mt-6 border-t border-base-content/30 pt-6">
 	<H1>Notes:</H1>
-	<form action="?/addNote">
-		<input type="text" placeholder="Note" class="input input-primary" />
+	<form use:anEnhance action="?/addNote" method="post" class="join flex">
+		<input
+			autofocus={true}
+			bind:value={$anForm.content}
+			type="text"
+			name="content"
+			placeholder="Note"
+			class="input join-item input-bordered flex-grow"
+		/>
+		<button class="btn btn-primary join-item">Add</button>
 	</form>
 	<div>
 		{#each notes as note}
@@ -56,22 +72,22 @@
 <dialog bind:this={descModal} class="modal">
 	<div class="modal-box">
 		<H1>Edit project</H1>
-		<form use:enhance action="?/editProject" method="post" class="flex flex-col gap-4">
+		<form use:epEnhance action="?/editProject" method="post" class="flex flex-col gap-4">
 			<input
 				type="text"
-				bind:value={$form.title}
+				bind:value={$epForm.title}
 				name="title"
 				class="input input-bordered w-full"
 				placeholder="Title"
-				{...$constraints.title}
+				{...$epConstraints.title}
 			/>
 			<input
 				type="text"
-				bind:value={$form.description}
+				bind:value={$epForm.description}
 				name="description"
 				class="input input-bordered w-full"
 				placeholder="Description"
-				{...$constraints.description}
+				{...$epConstraints.description}
 			/>
 			<div class="join flex">
 				<input
@@ -81,11 +97,8 @@
 					class="input join-item input-bordered w-full"
 					placeholder="Date"
 				/>
-				<button
-					type="button"
-					onclick={() => ($date = '')}
-					class="btn btn-square btn-error join-item"
-					aria-label="clear date"><i class="fa-solid fa-minus"></i></button
+				<button type="button" onclick={() => ($date = '')} class="btn btn-error join-item"
+					>Clear</button
 				>
 			</div>
 			<button type="submit" class="btn btn-primary">Update</button>

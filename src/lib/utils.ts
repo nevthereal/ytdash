@@ -20,7 +20,7 @@ export function checkUser(locals: App.Locals) {
 	return locals.user;
 }
 
-export function randomId(lenght: number) {
+export function randomId(length: number) {
 	const alphabet = 'abcdefghijklmnopqrstuvwxyz0123456789';
-	return generateRandomString(random, alphabet, lenght);
+	return generateRandomString(random, alphabet, length);
 }
