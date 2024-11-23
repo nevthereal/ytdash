@@ -11,10 +11,6 @@
 
 	let descModal: HTMLDialogElement;
 
-	$effect(() => {
-		descModal = document.getElementById('description_modal') as HTMLDialogElement;
-	});
-
 	const { form, enhance, constraints } = superForm(data.form, {
 		onSubmit: () => {
 			descModal.close();
@@ -44,7 +40,7 @@
 	</div>
 </div>
 
-<dialog id="description_modal" class="modal">
+<dialog bind:this={descModal} class="modal">
 	<div class="modal-box">
 		<H1>Edit project</H1>
 		<form use:enhance action="?/editProject" method="post" class="flex flex-col gap-4">
