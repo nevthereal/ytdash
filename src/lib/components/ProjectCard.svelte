@@ -14,7 +14,7 @@
 			>
 				{project.title}
 			</h1>
-			<div class="flex items-center gap-6">
+			<div class="flex items-center gap-2">
 				<p>
 					{#if project.description}
 						{project.description}
@@ -22,6 +22,7 @@
 						<span class="text-base-content/60">No description added</span>
 					{/if}
 				</p>
+				<span>·</span>
 				<p>
 					{#if project.date}
 						{dayjs(project.date).format('DD MMMM YYYY')}

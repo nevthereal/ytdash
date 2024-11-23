@@ -60,17 +60,35 @@
 				placeholder="Description"
 				{...$constraints.description}
 			/>
-			<input
-				type="date"
-				bind:value={$date}
-				name="date"
-				class="input input-bordered w-full"
-				placeholder="Date"
-			/>
-			<button>yay</button>
+			<div class="join flex">
+				<input
+					type="date"
+					bind:value={$date}
+					name="date"
+					class="input join-item input-bordered w-full"
+					placeholder="Date"
+				/>
+				<button
+					type="button"
+					onclick={() => ($date = '')}
+					class="btn btn-square btn-error join-item"
+					aria-label="clear date"><i class="fa-solid fa-minus"></i></button
+				>
+			</div>
+			<button type="submit" class="btn btn-primary">Update</button>
 		</form>
 	</div>
 	<form method="dialog" class="modal-backdrop">
-		<button>close</button>
+		<button>x</button>
 	</form>
 </dialog>
+
+<style>
+	input::-webkit-calendar-picker-indicator {
+		display: none;
+	}
+
+	input[type='date']::-webkit-input-placeholder {
+		visibility: hidden !important;
+	}
+</style>

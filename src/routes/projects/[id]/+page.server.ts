@@ -34,10 +34,16 @@ export const actions: Actions = {
 
 		const formData = form.data;
 
+		let date: null | string = null;
+
+		if (formData.date) {
+			date = formData.date.toISOString();
+		}
+
 		await db.update(projectsTable).set({
 			description: formData.description,
 			title: formData.title,
-			date: formData.date?.toISOString()
+			date
 		});
 
 		return { form };
