@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Note from '$lib/components/Note.svelte';
 	import BigH from '$lib/components/typography/BigH.svelte';
 	import H1 from '$lib/components/typography/H1.svelte';
 	import dayjs from 'dayjs';
@@ -52,6 +53,7 @@
 <section class="mt-6 border-t border-base-content/30 pt-6">
 	<H1>Notes:</H1>
 	<form use:anEnhance action="?/addNote" method="post" class="join flex">
+		<!-- svelte-ignore a11y_autofocus -->
 		<input
 			autofocus={true}
 			bind:value={$anForm.content}
@@ -64,7 +66,7 @@
 	</form>
 	<div>
 		{#each notes as note}
-			<p>{note.content}</p>
+			<Note {note} />
 		{/each}
 	</div>
 </section>

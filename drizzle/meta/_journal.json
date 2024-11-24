@@ -64,6 +64,13 @@
       "when": 1732389475244,
       "tag": "0008_mysterious_unus",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1732469203298,
+      "tag": "0009_whole_firebird",
+      "breakpoints": true
     }
   ]
 }

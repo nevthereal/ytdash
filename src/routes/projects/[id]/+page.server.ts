@@ -26,7 +26,7 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 
 	const notes = await db.query.notesTable.findMany({
 		where: eq(notesTable.projectId, qProject.id),
-		orderBy: desc(notesTable.createdAt)
+		orderBy: desc(notesTable.updatedAt)
 	});
 
 	return { project: qProject, editProjectForm, notes, addNoteForm };
