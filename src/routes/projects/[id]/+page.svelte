@@ -37,7 +37,10 @@
 </script>
 
 <section>
-	<H1>Project overview:</H1>
+	<H1 className="flex gap-2 items-center"
+		><a href="/projects" aria-label="see all project"><i class="fa-solid fa-arrow-left"></i></a
+		>Project overview:</H1
+	>
 	<BigH>{project.title}</BigH>
 
 	<div class="flex gap-2">
@@ -64,7 +67,7 @@
 		/>
 		<button class="btn btn-primary join-item">Add</button>
 	</form>
-	<div>
+	<div class="mt-4 flex flex-col gap-2">
 		{#each notes as note}
 			<Note {note} />
 		{/each}
