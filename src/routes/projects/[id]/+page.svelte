@@ -48,6 +48,10 @@
 			<p>{project.description}</p>
 			<p>·</p>
 		{/if}
+		{#if project.date}
+			<p>{dayjs(project.date).format('DD. MMM YYYY')}</p>
+			<p>·</p>
+		{/if}
 
 		<button class="underline" onclick={() => descModal.showModal()}>Edit project data</button>
 	</div>
@@ -69,7 +73,7 @@
 	</form>
 	<div class="mt-4 flex flex-col gap-2">
 		{#each notes as note}
-			<Note {note} />
+			<Note editForm={data.editNoteForm} {note} />
 		{/each}
 	</div>
 </section>

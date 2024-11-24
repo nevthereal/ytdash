@@ -12,6 +12,13 @@ export const zEditProject = z.object({
 	description: z.string().min(3).nullable().optional()
 });
 
+const content = z.string().min(3);
+
 export const zAddNote = z.object({
-	content: z.string().min(3)
+	content
+});
+
+export const zEditNote = z.object({
+	content,
+	id: z.string()
 });

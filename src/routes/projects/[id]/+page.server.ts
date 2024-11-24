@@ -6,13 +6,14 @@ import { notesTable, projectsTable } from '$lib/server/db/schema';
 import { error, fail } from '@sveltejs/kit';
 import { superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
-import { zAddNote, zEditProject } from '$lib/zod';
+import { zAddNote, zEditNote, zEditProject } from '$lib/zod';
 
 export const load: PageServerLoad = async ({ locals, params }) => {
 	const user = checkUser(locals);
 
 	const editProjectForm = await superValidate(zod(zEditProject));
 	const addNoteForm = await superValidate(zod(zAddNote));
+	const editNoteForm = await superValidate(zod(zEditNote));
 
 	const qProject = await db.query.projectsTable.findFirst({
 		where: eq(projectsTable.id, params.id)
@@ -29,11 +30,11 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 		orderBy: desc(notesTable.updatedAt)
 	});
 
-	return { project: qProject, editProjectForm, notes, addNoteForm };
+	return { project: qProject, editProjectForm, notes, addNoteForm, editNoteForm };
 };
 
 export const actions: Actions = {
-	editProject: async ({ request }) => {
+	editProject: async ({ request, params }) => {
 		const form = await superValidate(request, zod(zEditProject));
 
 		if (!form.valid) return fail(400, { form });
@@ -46,11 +47,14 @@ export const actions: Actions = {
 			date = formData.date.toISOString();
 		}
 
-		await db.update(projectsTable).set({
-			description: formData.description,
-			title: formData.title,
-			date
-		});
+		await db
+			.update(projectsTable)
+			.set({
+				description: formData.description,
+				title: formData.title,
+				date
+			})
+			.where(eq(projectsTable.id, params.id));
 
 		return { form };
 	},
@@ -64,5 +68,18 @@ export const actions: Actions = {
 			projectId: params.id,
 			id: randomId(16)
 		});
+	},
+	editNote: async ({ request }) => {
+		const form = await superValidate(request, zod(zEditNote));
+
+		if (!form.valid) return fail(400, { form });
+
+		await db
+			.update(notesTable)
+			.set({
+				content: form.data.content,
+				updatedAt: new Date()
+			})
+			.where(eq(notesTable.id, form.data.id));
 	}
 };
