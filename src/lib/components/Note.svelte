@@ -27,6 +27,8 @@
 	function toggleMode() {
 		editMode = !editMode;
 	}
+
+	$editForm.content = note.content;
 </script>
 
 <div class="group flex items-center rounded-box border border-base-300 bg-base-200 p-6">

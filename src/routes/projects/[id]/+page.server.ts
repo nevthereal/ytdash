@@ -7,13 +7,10 @@ import { error, fail } from '@sveltejs/kit';
 import { superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import { zAddNote, zEditNote, zEditProject } from '$lib/zod';
+import dayjs from 'dayjs';
 
 export const load: PageServerLoad = async ({ locals, params }) => {
 	const user = checkUser(locals);
-
-	const editProjectForm = await superValidate(zod(zEditProject));
-	const addNoteForm = await superValidate(zod(zAddNote));
-	const editNoteForm = await superValidate(zod(zEditNote));
 
 	const qProject = await db.query.projectsTable.findFirst({
 		where: eq(projectsTable.id, params.id)
@@ -29,6 +26,16 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 		where: eq(notesTable.projectId, qProject.id),
 		orderBy: desc(notesTable.updatedAt)
 	});
+
+	const editProjectForm = await superValidate(zod(zEditProject), {
+		defaults: {
+			title: qProject.title,
+			date: dayjs(qProject.date).toDate(),
+			description: qProject.description
+		}
+	});
+	const addNoteForm = await superValidate(zod(zAddNote));
+	const editNoteForm = await superValidate(zod(zEditNote));
 
 	return { project: qProject, editProjectForm, notes, addNoteForm, editNoteForm };
 };

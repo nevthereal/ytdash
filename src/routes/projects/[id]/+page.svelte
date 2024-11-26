@@ -8,7 +8,7 @@
 
 	let { data } = $props();
 
-	const project = data.project;
+	const project = $derived(data.project);
 	const notes = $derived(data.notes);
 
 	let descModal: HTMLDialogElement;
@@ -21,15 +21,10 @@
 		onSubmit: () => {
 			descModal.close();
 			toast(`Updating ${project.title}`);
-			location.reload();
 		}
 	});
 
 	const date = dateProxy(epForm, 'date', { format: 'date', empty: 'undefined' });
-
-	$date = dayjs(project.date).format('YYYY-MM-DD');
-	$epForm.title = project.title;
-	$epForm.description = project.description;
 
 	const { form: anForm, enhance: anEnhance } = superForm(data.addNoteForm, {
 		invalidateAll: true
