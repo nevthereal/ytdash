@@ -40,7 +40,8 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 };
 
 export const actions: Actions = {
-	editProject: async ({ request, params }) => {
+	editProject: async ({ request, params, locals }) => {
+		const user = checkUser(locals);
 		const form = await superValidate(request, zod(zEditProject));
 
 		if (!form.valid) return fail(400, { form });
@@ -64,7 +65,8 @@ export const actions: Actions = {
 
 		return { form };
 	},
-	addNote: async ({ request, params }) => {
+	addNote: async ({ request, params, locals }) => {
+		const user = checkUser(locals);
 		const form = await superValidate(request, zod(zAddNote));
 
 		if (!form.valid) return fail(400, { form });
@@ -72,7 +74,8 @@ export const actions: Actions = {
 		await db.insert(notesTable).values({
 			content: form.data.content,
 			projectId: params.id,
-			id: randomId(16)
+			id: randomId(16),
+			authorId: user.id
 		});
 	}
 };
