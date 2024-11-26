@@ -6,7 +6,7 @@ import { notesTable, projectsTable } from '$lib/server/db/schema';
 import { error, fail } from '@sveltejs/kit';
 import { superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
-import { zAddNote, zEditNote, zEditProject } from '$lib/zod';
+import { zAddNote, zEditProject } from '$lib/zod';
 import dayjs from 'dayjs';
 
 export const load: PageServerLoad = async ({ locals, params }) => {
@@ -35,9 +35,8 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 		}
 	});
 	const addNoteForm = await superValidate(zod(zAddNote));
-	const editNoteForm = await superValidate(zod(zEditNote));
 
-	return { project: qProject, editProjectForm, notes, addNoteForm, editNoteForm };
+	return { project: qProject, editProjectForm, notes, addNoteForm };
 };
 
 export const actions: Actions = {
@@ -75,18 +74,5 @@ export const actions: Actions = {
 			projectId: params.id,
 			id: randomId(16)
 		});
-	},
-	editNote: async ({ request }) => {
-		const form = await superValidate(request, zod(zEditNote));
-
-		if (!form.valid) return fail(400, { form });
-
-		await db
-			.update(notesTable)
-			.set({
-				content: form.data.content,
-				updatedAt: new Date()
-			})
-			.where(eq(notesTable.id, form.data.id));
 	}
 };

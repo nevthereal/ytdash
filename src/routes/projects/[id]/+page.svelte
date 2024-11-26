@@ -68,7 +68,7 @@
 	</form>
 	<div class="mt-4 flex flex-col gap-2">
 		{#each notes as note}
-			<Note editForm={data.editNoteForm} {note} />
+			<Note {note} />
 		{/each}
 	</div>
 </section>

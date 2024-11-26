@@ -17,8 +17,3 @@ const content = z.string().min(3);
 export const zAddNote = z.object({
 	content
 });
-
-export const zEditNote = z.object({
-	content,
-	id: z.string()
-});
