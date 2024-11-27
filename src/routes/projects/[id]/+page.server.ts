@@ -40,8 +40,8 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 };
 
 export const actions: Actions = {
-	editProject: async ({ request, params, locals }) => {
-		const user = checkUser(locals);
+	editProject: async ({ request, params }) => {
+		// const user = checkUser(locals);
 		const form = await superValidate(request, zod(zEditProject));
 
 		if (!form.valid) return fail(400, { form });

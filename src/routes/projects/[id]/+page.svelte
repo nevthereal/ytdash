@@ -2,7 +2,7 @@
 	import Note from '$lib/components/Note.svelte';
 	import BigH from '$lib/components/typography/BigH.svelte';
 	import H1 from '$lib/components/typography/H1.svelte';
-	import dayjs from 'dayjs';
+	import { prettyDate } from '$lib/utils.js';
 	import { toast } from 'svelte-sonner';
 	import { superForm, dateProxy } from 'sveltekit-superforms';
 
@@ -44,7 +44,9 @@
 			<p>·</p>
 		{/if}
 		{#if project.date}
-			<p>{dayjs(project.date).format('DD. MMM YYYY')}</p>
+			<p>
+				{prettyDate(project.date)}
+			</p>
 			<p>·</p>
 		{/if}
 

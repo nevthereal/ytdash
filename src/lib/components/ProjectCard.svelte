@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { type Project } from '$lib/server/db/schema';
-	import dayjs from 'dayjs';
 	import Menu from './Menu.svelte';
+	import { prettyDate, timeTo } from '$lib/utils';
 
 	let { project }: { project: Project } = $props();
 </script>
@@ -25,7 +25,7 @@
 				<span>·</span>
 				<p>
 					{#if project.date}
-						{dayjs(project.date).format('DD MMMM YYYY')}
+						{timeTo(project.date)}
 					{:else}
 						<span class="text-base-content/60">No date set</span>
 					{/if}
