@@ -69,7 +69,7 @@
 		<button class="btn btn-primary join-item">Add</button>
 	</form>
 	<div class="mt-4 flex flex-col gap-2">
-		{#each notes as note}
+		{#each notes as note (note.id)}
 			<Note {note} />
 		{/each}
 	</div>

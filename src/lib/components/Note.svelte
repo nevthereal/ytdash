@@ -2,6 +2,8 @@
 	import { invalidateAll } from '$app/navigation';
 	import type { Note } from '$lib/server/db/schema';
 	import { toast } from 'svelte-sonner';
+	import { cubicInOut } from 'svelte/easing';
+	import { slide } from 'svelte/transition';
 
 	interface Props {
 		note: Note;
@@ -19,7 +21,10 @@
 	}
 </script>
 
-<div class="group flex items-center rounded-box border border-base-300 bg-base-200 p-6">
+<div
+	transition:slide={{ duration: 300, easing: cubicInOut }}
+	class="group flex items-center rounded-box border border-base-300 bg-base-200 p-6"
+>
 	<p class="flex-grow text-xl">
 		{note.content}
 	</p>
