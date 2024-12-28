@@ -57,9 +57,7 @@
 <section class="mt-6 border-t border-base-content/30 pt-6">
 	<H1>Notes:</H1>
 	<form use:anEnhance action="?/addNote" method="post" class="join flex">
-		<!-- svelte-ignore a11y_autofocus -->
 		<input
-			autofocus={true}
 			bind:value={$anForm.content}
 			type="text"
 			name="content"

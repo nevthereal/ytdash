@@ -22,7 +22,7 @@
 </script>
 
 <div
-	transition:slide={{ duration: 300, easing: cubicInOut }}
+	transition:slide={{ duration: 150, easing: cubicInOut }}
 	class="group flex items-center rounded-box border border-base-300 bg-base-200 p-6"
 >
 	<p class="flex-grow text-xl">
