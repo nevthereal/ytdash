@@ -6,6 +6,18 @@
 	import { toast } from 'svelte-sonner';
 	import { superForm, dateProxy } from 'sveltekit-superforms';
 
+	const Pikaday = require('pikaday');
+
+	let myDatepicker: HTMLInputElement;
+	$effect(() => {
+		if (myDatepicker) {
+			const picker = new Pikaday({
+				field: myDatepicker
+			});
+			return () => picker.destroy();
+		}
+	});
+
 	let { data } = $props();
 
 	const project = $derived(data.project);
@@ -54,7 +66,7 @@
 	</div>
 </section>
 
-<section class="mt-6 border-t border-base-content/30 pt-6">
+<section class="border-base-content/30 mt-6 border-t pt-6">
 	<H1>Notes:</H1>
 	<form use:anEnhance action="?/addNote" method="post" class="join flex">
 		<input
