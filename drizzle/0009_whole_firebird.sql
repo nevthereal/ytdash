@@ -1,1 +1,0 @@
-ALTER TABLE "note" RENAME COLUMN "created_at" TO "updated_at";

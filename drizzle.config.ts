@@ -8,8 +8,7 @@ export default defineConfig({
 		url: process.env.DATABASE_URL
 	},
 
-	dialect: 'postgresql',
-	casing: 'snake_case',
 	verbose: true,
-	strict: true
+	strict: true,
+	dialect: 'postgresql'
 });
