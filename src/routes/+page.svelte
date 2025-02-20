@@ -1,60 +1,18 @@
 <script lang="ts">
+	import { projectStatusEnum, type Project } from '$lib/db/schema';
 	import { droppable, draggable, type DragDropState } from '@thisux/sveltednd';
 	import { flip } from 'svelte/animate';
 	import { fade } from 'svelte/transition';
 
-	type Status = 'todo' | 'scrap' | 're-record' | 'in-progress' | 'done';
-	interface Project {
-		id: string;
-		title: string;
-		description: string;
-		status: Status;
-		priority: 'low' | 'medium' | 'high';
-	}
+	let { data } = $props();
 
-	let projects = $state<Project[]>([
-		{
-			id: '1',
-			title: 'Design System Updates',
-			description: 'Update color palette and component library',
-			status: 'todo',
-			priority: 'high'
-		},
-		{
-			id: '2',
-			title: 'User Research',
-			description: 'Conduct interviews with 5 key customers',
-			status: 'in-progress',
-			priority: 'medium'
-		},
-		{
-			id: '3',
-			title: 'API Documentation',
-			description: 'Document new endpoints and examples',
-			status: 'todo',
-			priority: 'low'
-		},
-		{
-			id: '4',
-			title: 'Performance Audit',
-			description: 'Analyze and optimize load times',
-			status: 'in-progress',
-			priority: 'high'
-		},
-		{
-			id: '5',
-			title: 'Bug Fixes',
-			description: 'Fix reported authentication issues',
-			status: 'done',
-			priority: 'high'
-		}
-	]);
+	const statusValues = projectStatusEnum.enumValues;
 
-	const columns: Status[] = ['todo', 'in-progress', 'done'];
-	const tasksByStatus = $derived(
+	const columns = statusValues;
+	const projectsByStatus = $derived(
 		columns.map((status) => ({
 			status,
-			items: projects.filter((task) => task.status === status)
+			items: data.projects.filter((prj) => prj.status === status)
 		}))
 	);
 
@@ -63,31 +21,25 @@
 		if (!targetContainer) return; // Prevent self-placement
 
 		// Update the task's status to the target container
-		projects = projects.map((task: Project) => {
-			if (task.id === draggedItem.id) {
-				task.status = targetContainer as Status;
+		data.projects = data.projects.map((project) => {
+			if (project.id === draggedItem.id) {
+				project.status = targetContainer as (typeof statusValues)[number];
 			}
-			return task;
+			return project;
 		});
 	}
-
-	const getPriorityColor = (priority: Project['priority']) => {
-		return {
-			low: 'bg-blue-50 text-blue-700',
-			medium: 'bg-yellow-50 text-yellow-700',
-			high: 'bg-red-50 text-red-700'
-		}[priority];
-	};
 </script>
 
-<div class="min-h-screen overflow-hidden bg-gray-50 p-8">
+<main class="p-8">
 	<div class="mb-8 flex flex-col gap-2">
-		<h1 class="text-2xl font-bold text-gray-900">Kanban Board</h1>
-		<p class="text-gray-600">Drag and drop tasks between columns to reorder them in the board.</p>
+		<h1 class="text-2xl font-bold">Board View</h1>
+		<p class="text-gray-600">
+			Drag and drop projects between columns to reorder them in the board.
+		</p>
 	</div>
 
 	<div class="flex gap-6 overflow-x-auto p-2">
-		{#each tasksByStatus as { status, items }}
+		{#each projectsByStatus as { status, items }}
 			<div class="w-80 flex-none">
 				<div
 					class="rounded-xl bg-gray-100 p-4 shadow-sm ring-1 ring-gray-200"
@@ -126,17 +78,7 @@
 									<h3 class="font-medium text-gray-900">
 										{task.title}
 									</h3>
-									<span
-										class={`rounded-full px-2 py-0.5 text-xs font-medium ${getPriorityColor(
-											task.priority
-										)}`}
-									>
-										{task.priority}
-									</span>
 								</div>
-								<p class="text-sm text-gray-500">
-									{task.description}
-								</p>
 							</div>
 						{/each}
 					</div>
@@ -144,14 +86,4 @@
 			</div>
 		{/each}
 	</div>
-</div>
-
-<style>
-	:global(.dragging) {
-		@apply opacity-50 shadow-lg ring-2 ring-blue-400;
-	}
-
-	:global(.drag-over) {
-		@apply bg-blue-50 ring-2 ring-blue-400;
-	}
-</style>
+</main>

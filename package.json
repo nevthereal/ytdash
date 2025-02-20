@@ -46,6 +46,7 @@
 	},
 	"dependencies": {
 		"@neondatabase/serverless": "^0.10.4",
+		"@nevthereal/random-utils": "^1.0.11",
 		"@thisux/sveltednd": "^0.0.20",
 		"drizzle-orm": "^0.38.4",
 		"mode-watcher": "^0.5.1"
