@@ -34,7 +34,7 @@
 		"prettier": "^3.4.2",
 		"prettier-plugin-svelte": "^3.3.3",
 		"prettier-plugin-tailwindcss": "^0.6.10",
-		"svelte": "^5.0.0",
+		"svelte": "^5.20.2",
 		"svelte-check": "^4.0.0",
 		"tailwind-merge": "^3.0.1",
 		"tailwind-variants": "^0.3.1",
@@ -46,6 +46,8 @@
 	},
 	"dependencies": {
 		"@neondatabase/serverless": "^0.10.4",
-		"drizzle-orm": "^0.38.4"
+		"@thisux/sveltednd": "^0.0.20",
+		"drizzle-orm": "^0.38.4",
+		"mode-watcher": "^0.5.1"
 	}
 }
