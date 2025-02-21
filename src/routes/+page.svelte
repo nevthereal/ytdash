@@ -5,6 +5,7 @@
 	import { flip } from 'svelte/animate';
 	import { fade } from 'svelte/transition';
 	import * as Card from '$lib/components/ui/card/index';
+	import { cn } from '$lib/utils';
 
 	let { data } = $props();
 
@@ -41,7 +42,18 @@
 		{#each projectsByStatus as { status, items: projects }}
 			<div class="w-80 flex-none">
 				<div
-					class="overflow-scroll rounded-2xl p-4 ring-2 ring-muted-foreground"
+					class={cn(
+						'overflow-scroll rounded-2xl p-4 ring-2 ring-gray-400',
+						status === 'todo'
+							? 'bg-gray-400/15'
+							: status === 're-record'
+								? 'bg-orange-400/15'
+								: status === 'in-progress'
+									? 'bg-blue-400/15'
+									: status === 'done'
+										? 'bg-green-400/15'
+										: 'bg-red-400/15'
+					)}
 					use:droppable={{
 						// The container is the status of the task. e.g. 'todo', 'in-progress', 'done'
 						container: status,
@@ -76,7 +88,7 @@
 								animate:flip={{ duration: 200 }}
 								in:fade={{ duration: 150 }}
 								out:fade={{ duration: 150 }}
-								class="cursor-move rounded-xl bg-muted-foreground/10 p-3 ring-2 ring-muted-foreground transition-all duration-200"
+								class="cursor-move rounded-xl bg-gray-400/10 p-3 ring-2 ring-gray-400 transition-all duration-200"
 							>
 								<div class="flex flex-col gap-2">
 									<h2 class="text-xl font-bold">
