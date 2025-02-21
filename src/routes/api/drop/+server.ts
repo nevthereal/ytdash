@@ -11,8 +11,6 @@ export const POST: RequestHandler = async ({ url }) => {
 
 	const target = url.searchParams.get('target') as (typeof projectStatusEnum.enumValues)[number];
 
-	console.log(projectId, target);
-
 	await db
 		.update(project)
 		.set({

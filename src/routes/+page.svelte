@@ -4,6 +4,7 @@
 	import { droppable, draggable, type DragDropState } from '@thisux/sveltednd';
 	import { flip } from 'svelte/animate';
 	import { fade } from 'svelte/transition';
+	import * as Card from '$lib/components/ui/card/index';
 
 	let { data } = $props();
 
@@ -30,19 +31,17 @@
 	}
 </script>
 
-<main class="p-8">
-	<div class="mb-8 flex flex-col gap-2">
+<main class="overflow-x-scroll p-8">
+	<div class="mb-4">
 		<h1 class="text-2xl font-bold">Board View</h1>
-		<p class="text-gray-600">
-			Drag and drop projects between columns to reorder them in the board.
-		</p>
+		<p>Drag and drop projects between columns to reorder them in the board.</p>
 	</div>
 
 	<div class="flex gap-6 overflow-x-auto p-2">
 		{#each projectsByStatus as { status, items: projects }}
 			<div class="w-80 flex-none">
 				<div
-					class="rounded-xl bg-gray-100 p-4 shadow-sm ring-1 ring-gray-200"
+					class="overflow-scroll rounded-2xl p-4 ring-2 ring-muted-foreground"
 					use:droppable={{
 						// The container is the status of the task. e.g. 'todo', 'in-progress', 'done'
 						container: status,
@@ -51,10 +50,10 @@
 					}}
 				>
 					<div class="mb-4 flex items-center justify-between">
-						<h2 class="font-semibold capitalize text-gray-900">
+						<h2 class="font-semibold capitalize">
 							{status.replace('-', ' ')}
 						</h2>
-						<span class="rounded-full bg-gray-100 px-2.5 py-0.5 text-sm text-gray-600">
+						<span class="px-2.5 py-0.5 text-sm">
 							{projects.length}
 						</span>
 					</div>
@@ -77,13 +76,20 @@
 								animate:flip={{ duration: 200 }}
 								in:fade={{ duration: 150 }}
 								out:fade={{ duration: 150 }}
-								class="svelte-dnd-touch-feedback cursor-move rounded-lg bg-white p-3 shadow-sm ring-1
-                                       ring-gray-200 transition-all duration-200 hover:shadow-md hover:ring-2 hover:ring-blue-200"
+								class="cursor-move rounded-xl bg-muted-foreground/10 p-3 ring-2 ring-muted-foreground transition-all duration-200"
 							>
-								<div class="mb-2 flex items-start justify-between gap-2">
-									<h3 class="font-medium text-gray-900">
+								<div class="flex flex-col gap-2">
+									<h2 class="text-xl font-bold">
 										{prj.title}
-									</h3>
+									</h2>
+									{#if prj.date}
+										<h3>
+											{Intl.DateTimeFormat('en', {
+												dateStyle: 'medium',
+												timeStyle: 'short'
+											}).format(prj.date)}
+										</h3>
+									{/if}
 								</div>
 							</div>
 						{/each}
@@ -93,3 +99,9 @@
 		{/each}
 	</div>
 </main>
+
+<style>
+	:global(.dragging) {
+		@apply opacity-50;
+	}
+</style>
