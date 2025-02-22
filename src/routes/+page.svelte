@@ -4,8 +4,11 @@
 	import { droppable, draggable, type DragDropState } from '@thisux/sveltednd';
 	import { flip } from 'svelte/animate';
 	import { fade } from 'svelte/transition';
-	import * as Card from '$lib/components/ui/card/index';
 	import { cn } from '$lib/utils';
+	import { Plus } from 'lucide-svelte';
+	import Button from '$lib/components/ui/button/button.svelte';
+	import { enhance } from '$app/forms';
+	import Input from '$lib/components/ui/input/input.svelte';
 
 	let { data } = $props();
 
@@ -30,6 +33,9 @@
 		});
 		invalidateAll();
 	}
+
+	let newItem = $state(false);
+	let newInput = $state() as HTMLInputElement;
 </script>
 
 <main class="overflow-x-scroll p-8">
@@ -88,7 +94,7 @@
 								animate:flip={{ duration: 200 }}
 								in:fade={{ duration: 150 }}
 								out:fade={{ duration: 150 }}
-								class="cursor-move rounded-xl bg-gray-400/10 p-3 ring-2 ring-muted-foreground transition-all duration-200"
+								class="cursor-move rounded-xl bg-gray-400/10 p-4 ring-2 ring-muted-foreground transition-all duration-200"
 							>
 								<div class="flex flex-col gap-2">
 									<h2 class="text-xl font-bold">
@@ -105,6 +111,20 @@
 								</div>
 							</div>
 						{/each}
+						{#if status === 'todo'}
+							{#if newItem}
+								<form action="/?/new" id="new-form" use:enhance method="post">
+									<input
+										defaultValue="New Project"
+										class="w-full rounded-xl bg-gray-400/10 p-4 text-xl font-bold ring-2 ring-muted-foreground"
+										type="text"
+										name="project-name"
+									/>
+								</form>
+							{/if}
+							<Button onclick={() => (newItem = true)} class="w-full font-bold"
+								><Plus />New Item</Button
+							>{/if}
 					</div>
 				</div>
 			</div>

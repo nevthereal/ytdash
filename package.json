@@ -14,7 +14,8 @@
 		"lint": "prettier --check . && eslint .",
 		"db:push": "drizzle-kit push",
 		"db:migrate": "drizzle-kit migrate",
-		"db:studio": "drizzle-kit studio"
+		"db:studio": "drizzle-kit studio",
+		"db:generate": "drizzle-kit generate"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.2.5",
@@ -49,6 +50,8 @@
 		"@nevthereal/random-utils": "^1.0.11",
 		"@thisux/sveltednd": "^0.0.20",
 		"drizzle-orm": "^0.38.4",
-		"mode-watcher": "^0.5.1"
+		"lucide-svelte": "^0.475.0",
+		"mode-watcher": "^0.5.1",
+		"zod": "^3.24.2"
 	}
 }

@@ -13,7 +13,7 @@ export const project = pgTable('project', {
 	id: serial().primaryKey(),
 	title: text().notNull(),
 	date: timestamp(),
-	status: projectStatusEnum().default('in-progress').notNull()
+	status: projectStatusEnum().default('todo').notNull()
 });
 
 export type Project = typeof project.$inferSelect;
