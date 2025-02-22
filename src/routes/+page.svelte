@@ -43,16 +43,16 @@
 			<div class="w-80 flex-none">
 				<div
 					class={cn(
-						'overflow-scroll rounded-2xl p-4 ring-2 ring-gray-400',
+						'overflow-scroll rounded-2xl p-4 ring-2 ring-muted-foreground',
 						status === 'todo'
-							? 'bg-gray-400/15'
+							? 'bg-todo'
 							: status === 're-record'
-								? 'bg-orange-400/15'
+								? 'bg-re-record'
 								: status === 'in-progress'
-									? 'bg-blue-400/15'
+									? 'bg-in-progress'
 									: status === 'done'
-										? 'bg-green-400/15'
-										: 'bg-red-400/15'
+										? 'bg-done'
+										: 'bg-scrap'
 					)}
 					use:droppable={{
 						// The container is the status of the task. e.g. 'todo', 'in-progress', 'done'
@@ -88,7 +88,7 @@
 								animate:flip={{ duration: 200 }}
 								in:fade={{ duration: 150 }}
 								out:fade={{ duration: 150 }}
-								class="cursor-move rounded-xl bg-gray-400/10 p-3 ring-2 ring-gray-400 transition-all duration-200"
+								class="cursor-move rounded-xl bg-gray-400/10 p-3 ring-2 ring-muted-foreground transition-all duration-200"
 							>
 								<div class="flex flex-col gap-2">
 									<h2 class="text-xl font-bold">
