@@ -59,11 +59,11 @@ const config: Config = {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				todo: 'oklch(60% 0.10 240 / 0.7)',
-				're-record': 'oklch(70% 0.15 60 / 0.7)',
-				done: 'oklch(80% 0.05 140 / 0.7)',
-				scrap: 'oklch(50% 0.20 20 / 0.7)',
-				'in-progress': 'oklch(65% 0.15 300 / 0.7)'
+				todo: 'hsl(39, 100%, 65%, 0.25)',
+				inprogress: 'hsl(210, 100%, 62%, 0.25)',
+				done: 'hsl(120, 100%, 60%, 0.25)',
+				scrap: 'hsl(0, 100%, 67%, 0.25)',
+				rerecord: 'hsl(300, 100%, 72%, 0.25)'
 			},
 			borderRadius: {
 				xl: 'calc(var(--radius) + 4px)',
