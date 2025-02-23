@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { superForm } from 'sveltekit-superforms';
 	import { invalidateAll } from '$app/navigation';
 	import { projectStatusEnum, type Project } from '$lib/db/schema';
 	import { droppable, draggable, type DragDropState } from '@thisux/sveltednd';
@@ -6,9 +7,6 @@
 	import { fade } from 'svelte/transition';
 	import { cn } from '$lib/utils';
 	import { Plus } from 'lucide-svelte';
-	import Button from '$lib/components/ui/button/button.svelte';
-	import { enhance } from '$app/forms';
-	import Input from '$lib/components/ui/input/input.svelte';
 
 	let { data } = $props();
 
@@ -35,7 +33,12 @@
 	}
 
 	let newItem = $state(false);
-	let newInput = $state() as HTMLInputElement;
+
+	const { form, enhance, constraints } = superForm(data.newProjectForm, {
+		onSubmit: () => {
+			newItem = false;
+		}
+	});
 </script>
 
 <main class="overflow-x-scroll p-8">
@@ -49,7 +52,7 @@
 			<div class="w-80 flex-none">
 				<div
 					class={cn(
-						'overflow-scroll rounded-2xl p-4 ring-2 ring-muted-foreground',
+						'overflow-scroll rounded-2xl border-2 border-gray-400 p-4',
 						status === 'todo'
 							? 'bg-todo'
 							: status === 're-record'
@@ -94,7 +97,7 @@
 								animate:flip={{ duration: 200 }}
 								in:fade={{ duration: 150 }}
 								out:fade={{ duration: 150 }}
-								class="cursor-move rounded-xl bg-gray-400/10 p-4 ring-2 ring-muted-foreground transition-all duration-200"
+								class="cursor-move rounded-xl border-2 border-gray-400 bg-gray-400/10 p-4 transition-all duration-200"
 							>
 								<div class="flex flex-col gap-2">
 									<h2 class="text-xl font-bold">
@@ -115,15 +118,18 @@
 							{#if newItem}
 								<form action="/?/new" id="new-form" use:enhance method="post">
 									<input
-										defaultValue="New Project"
-										class="w-full rounded-xl bg-gray-400/10 p-4 text-xl font-bold ring-2 ring-muted-foreground"
+										{...$constraints.title}
+										bind:value={$form.title}
+										class="w-full rounded-xl border-2 border-gray-400 bg-gray-400/10 p-4 text-xl font-bold"
 										type="text"
-										name="project-name"
+										name="title"
 									/>
 								</form>
 							{/if}
-							<Button onclick={() => (newItem = true)} class="w-full font-bold"
-								><Plus />New Item</Button
+							<button
+								onclick={() => (newItem = true)}
+								class="flex w-full justify-center gap-2 rounded-xl bg-white p-2 font-bold text-black"
+								><Plus />New Item</button
 							>{/if}
 					</div>
 				</div>
