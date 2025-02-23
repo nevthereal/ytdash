@@ -1,3 +1,9 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@theme {
+	--color-todo: hsl(39, 100%, 65%, 0.25);
+	--color-inprogress: hsl(210, 100%, 62%, 0.25);
+	--color-done: hsl(120, 100%, 60%, 0.25);
+	--color-scrap: hsl(0, 100%, 67%, 0.25);
+	--color-rerecord: hsl(300, 100%, 72%, 0.25);
+}
