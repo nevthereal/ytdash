@@ -11,7 +11,7 @@
 
 	let { data } = $props();
 
-	const { projects } = $derived(data);
+	const { projects, editProjectForm } = $derived(data);
 
 	const statusValues = projectStatusEnum.enumValues;
 
@@ -90,7 +90,7 @@
 
 					<div class="space-y-3">
 						{#each projects as prj (prj.id)}
-							<ProjectCard {prj} {status} />
+							<ProjectCard editForm={editProjectForm} {prj} {status} />
 						{/each}
 						{#if status === 'todo'}
 							{#if newItem}
