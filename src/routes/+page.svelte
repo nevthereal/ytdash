@@ -7,6 +7,7 @@
 	import { fade } from 'svelte/transition';
 	import { cn } from '$lib/utils';
 	import { Plus } from 'lucide-svelte';
+	import ProjectCard from '$lib/components/ProjectCard.svelte';
 
 	let { data } = $props();
 
@@ -38,6 +39,14 @@
 		onSubmit: () => {
 			newItem = false;
 		}
+	});
+
+	$effect(() => {
+		document.addEventListener('keydown', (event) => {
+			if (event.key === 'Escape') {
+				newItem = false;
+			}
+		});
 	});
 </script>
 
@@ -81,38 +90,7 @@
 
 					<div class="space-y-3">
 						{#each projects as prj (prj.id)}
-							<div
-								use:draggable={{
-									// The container is the status of the task. e.g. 'todo', 'in-progress', 'done'
-									container: status,
-									// The dragData is the task that is being dragged
-									dragData: prj,
-									callbacks: {
-										onDrop: (e) => {
-											console.log(e.invalidDrop);
-										},
-										onDragStart: () => console.log('drag start')
-									}
-								}}
-								animate:flip={{ duration: 200 }}
-								in:fade={{ duration: 150 }}
-								out:fade={{ duration: 150 }}
-								class="cursor-move rounded-xl border-2 border-gray-400 bg-gray-400/10 p-4 transition-all duration-200"
-							>
-								<div class="flex flex-col gap-2">
-									<h2 class="text-xl font-bold">
-										{prj.title}
-									</h2>
-									{#if prj.date}
-										<h3>
-											{Intl.DateTimeFormat('en', {
-												dateStyle: 'medium',
-												timeStyle: 'short'
-											}).format(prj.date)}
-										</h3>
-									{/if}
-								</div>
-							</div>
+							<ProjectCard {prj} {status} />
 						{/each}
 						{#if status === 'todo'}
 							{#if newItem}
@@ -123,6 +101,7 @@
 										class="w-full rounded-xl border-2 border-gray-400 bg-gray-400/10 p-4 text-xl font-bold"
 										type="text"
 										name="title"
+										placeholder="New Project"
 									/>
 								</form>
 							{/if}

@@ -1,8 +1,19 @@
 <script lang="ts">
-	import { droppable, draggable, type DragDropState } from '@thisux/sveltednd';
+	import { draggable } from '@thisux/sveltednd';
+	import { fade } from 'svelte/transition';
+	import { type Project } from '$lib/db/schema';
+	import { projectStatusEnum } from '$lib/db/schema';
+
+	interface Props {
+		prj: Project;
+		status: (typeof projectStatusEnum.enumValues)[number];
+	}
+
+	let { prj, status }: Props = $props();
 </script>
 
-<div
+<button
+	ondblclick={() => console.log('double clicked')}
 	use:draggable={{
 		// The container is the status of the task. e.g. 'todo', 'in-progress', 'done'
 		container: status,
@@ -15,10 +26,9 @@
 			onDragStart: () => console.log('drag start')
 		}
 	}}
-	animate:flip={{ duration: 200 }}
 	in:fade={{ duration: 150 }}
 	out:fade={{ duration: 150 }}
-	class="cursor-move rounded-xl border-2 border-muted-foreground bg-gray-400/10 p-4 transition-all duration-200"
+	class="w-full cursor-move rounded-xl border-2 border-gray-400 bg-gray-400/10 p-4 text-left transition-all duration-200"
 >
 	<div class="flex flex-col gap-2">
 		<h2 class="text-xl font-bold">
@@ -33,4 +43,4 @@
 			</h3>
 		{/if}
 	</div>
-</div>
+</button>
