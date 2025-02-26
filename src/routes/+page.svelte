@@ -2,7 +2,7 @@
 	import { superForm } from 'sveltekit-superforms';
 	import { invalidateAll } from '$app/navigation';
 	import { projectStatusEnum, type Project } from '$lib/db/schema';
-	import { droppable, draggable, type DragDropState } from '@thisux/sveltednd';
+	import { droppable, type DragDropState } from '@thisux/sveltednd';
 	import { cn } from '$lib/utils';
 	import { Plus } from 'lucide-svelte';
 	import ProjectCard from '$lib/components/ProjectCard.svelte';

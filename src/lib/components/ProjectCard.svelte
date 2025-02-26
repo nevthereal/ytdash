@@ -5,6 +5,7 @@
 	import { projectStatusEnum } from '$lib/db/schema';
 	import { superForm, type Infer, type SuperValidated } from 'sveltekit-superforms';
 	import type { zNewProject } from '$lib/zod';
+	import { Sticker } from 'lucide-svelte';
 
 	interface Props {
 		prj: Project;
@@ -42,17 +43,21 @@
 			onDrop: (e) => {
 				console.log(e.invalidDrop);
 			}
-		}
+		},
+		interactive: ['a']
 	}}
 	in:fade={{ duration: 150 }}
 	out:fade={{ duration: 150 }}
 	class="w-full cursor-move rounded-xl border-2 border-gray-400 bg-gray-400/10 p-4 text-left transition-all duration-200"
 >
-	<div class="flex flex-col gap-2">
+	<div class="group flex flex-col gap-2">
 		{#if !edit}
-			<h2 class="text-xl font-bold">
-				{prj.title}
-			</h2>
+			<div class="flex items-center justify-between">
+				<h2 class="text-xl font-bold">
+					{prj.title}
+				</h2>
+				<a href="/project/{prj.id}" class="invisible group-hover:visible"><Sticker size={20} /></a>
+			</div>
 		{:else}
 			<form use:enhance action="/?/edit" method="post">
 				<input
