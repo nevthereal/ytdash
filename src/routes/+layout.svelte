@@ -5,5 +5,9 @@
 	let { children } = $props();
 </script>
 
-<ModeWatcher defaultMode="dark" />
-{@render children()}
+<nav class="p-8">
+	<a href="/" class="text-5xl font-black italic">YouKan</a>
+</nav>
+<main>
+	{@render children()}
+</main>

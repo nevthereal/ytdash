@@ -50,7 +50,7 @@
 	let newInput = $state() as HTMLInputElement;
 </script>
 
-<main class="overflow-x-scroll p-8">
+<section class="overflow-x-scroll px-8">
 	<div class="mb-4">
 		<h1 class="text-2xl font-bold">Board View</h1>
 		<p>Drag and drop projects between columns to reorder them in the board.</p>
@@ -121,7 +121,7 @@
 			</div>
 		{/each}
 	</div>
-</main>
+</section>
 
 <style>
 	:global(.dragging) {
