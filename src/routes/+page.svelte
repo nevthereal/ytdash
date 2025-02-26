@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { superForm } from 'sveltekit-superforms';
 	import { invalidateAll } from '$app/navigation';
-	import { projectStatusEnum, type Project } from '$lib/db/schema';
+	import { projectStatusEnum, type Project } from '$lib/db/schema/project.sql.js';
 	import { droppable, type DragDropState } from '@thisux/sveltednd';
 	import { cn } from '$lib/utils';
 	import { Plus } from 'lucide-svelte';
@@ -113,7 +113,7 @@
 										newInput.focus();
 									}, 20);
 								}}
-								class="flex w-full justify-center gap-2 rounded-xl bg-white p-2 font-bold text-black"
+								class="flex w-full justify-center gap-2 rounded-xl border p-4 font-bold text-black"
 								><Plus />New Item</button
 							>{/if}
 					</div>

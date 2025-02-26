@@ -1,5 +1,5 @@
-import { generateCode } from '@nevthereal/random-utils';
-import { pgTable, text, integer, pgEnum, timestamp, serial } from 'drizzle-orm/pg-core';
+import { pgTable, text, pgEnum, timestamp, serial } from 'drizzle-orm/pg-core';
+import { user } from './auth.sql';
 
 export const projectStatusEnum = pgEnum('status', [
 	'todo',
@@ -13,7 +13,8 @@ export const project = pgTable('project', {
 	id: serial().primaryKey(),
 	title: text().notNull(),
 	date: timestamp(),
-	status: projectStatusEnum().default('todo').notNull()
+	status: projectStatusEnum().default('todo').notNull(),
+	ownerId: text().references(() => user.id, { onDelete: 'cascade' })
 });
 
 export type Project = typeof project.$inferSelect;
