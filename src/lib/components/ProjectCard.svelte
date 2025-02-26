@@ -56,7 +56,12 @@
 				<h2 class="text-xl font-bold">
 					{prj.title}
 				</h2>
-				<a href="/project/{prj.id}" class="invisible group-hover:visible"><Sticker size={20} /></a>
+				<a
+					title="Notes"
+					aria-label="Notes"
+					href="/project/{prj.id}"
+					class="invisible group-hover:visible"><Sticker size={20} /></a
+				>
 			</div>
 		{:else}
 			<form use:enhance action="/?/edit" method="post">
