@@ -23,10 +23,17 @@
 	});
 
 	$form.title = prj.title;
+
+	let input = $state() as HTMLInputElement;
 </script>
 
 <button
-	ondblclick={() => (edit = true)}
+	ondblclick={() => {
+		edit = true;
+		setTimeout(() => {
+			input.focus();
+		}, 20);
+	}}
 	use:draggable={{
 		disabled: edit,
 		container: status,
@@ -48,7 +55,13 @@
 			</h2>
 		{:else}
 			<form use:enhance action="/?/edit" method="post">
-				<input name="title" bind:value={$form.title} class="w-full text-xl" type="text" />
+				<input
+					bind:this={input}
+					name="title"
+					bind:value={$form.title}
+					class="w-full text-xl"
+					type="text"
+				/>
 			</form>
 		{/if}
 		{#if prj.date}

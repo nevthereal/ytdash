@@ -3,8 +3,6 @@
 	import { invalidateAll } from '$app/navigation';
 	import { projectStatusEnum, type Project } from '$lib/db/schema';
 	import { droppable, draggable, type DragDropState } from '@thisux/sveltednd';
-	import { flip } from 'svelte/animate';
-	import { fade } from 'svelte/transition';
 	import { cn } from '$lib/utils';
 	import { Plus } from 'lucide-svelte';
 	import ProjectCard from '$lib/components/ProjectCard.svelte';
@@ -48,6 +46,8 @@
 			}
 		});
 	});
+
+	let newInput = $state() as HTMLInputElement;
 </script>
 
 <main class="overflow-x-scroll p-8">
@@ -96,6 +96,7 @@
 							{#if newItem}
 								<form action="/?/new" id="new-form" use:enhance method="post">
 									<input
+										bind:this={newInput}
 										{...$constraints.title}
 										bind:value={$form.title}
 										class="w-full rounded-xl border-2 border-gray-400 bg-gray-400/10 p-4 text-xl font-bold"
@@ -106,7 +107,12 @@
 								</form>
 							{/if}
 							<button
-								onclick={() => (newItem = true)}
+								onclick={() => {
+									newItem = true;
+									setTimeout(() => {
+										newInput.focus();
+									}, 20);
+								}}
 								class="flex w-full justify-center gap-2 rounded-xl bg-white p-2 font-bold text-black"
 								><Plus />New Item</button
 							>{/if}
