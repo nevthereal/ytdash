@@ -6,4 +6,15 @@
 	--color-done: hsl(120, 100%, 60%, 0.25);
 	--color-scrap: hsl(0, 100%, 67%, 0.25);
 	--color-rerecord: hsl(300, 100%, 72%, 0.25);
+
+	--radius-default: 4rem;
+}
+
+@utility no-scrollbar {
+	&::-webkit-scrollbar {
+		display: none;
+	}
+	/* Hide scrollbar for IE, Edge and Firefox */
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
 }

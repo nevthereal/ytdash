@@ -8,6 +8,6 @@
 <nav class="p-8">
 	<a href="/" class="text-5xl font-black italic">YouKan</a>
 </nav>
-<main>
+<main class="no-scrollbar px-8">
 	{@render children()}
 </main>
