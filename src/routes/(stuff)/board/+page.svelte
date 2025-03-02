@@ -61,7 +61,7 @@
 			<div class="w-80 flex-none">
 				<div
 					class={cn(
-						'rounded-default overflow-scroll border-2 border-gray-400 p-4',
+						'rounded-default overflow-scroll border-2 p-4',
 						status === 'todo'
 							? 'bg-todo'
 							: status === 're-record'
@@ -99,7 +99,7 @@
 										bind:this={newInput}
 										{...$constraints.title}
 										bind:value={$form.title}
-										class="rounded-default w-full border-2 border-gray-400 bg-gray-400/10 p-4 text-xl font-bold"
+										class="rounded-default w-full border-2 bg-gray-400/10 p-4 text-xl font-bold"
 										type="text"
 										name="title"
 										placeholder="New Project"
@@ -113,7 +113,7 @@
 										newInput.focus();
 									}, 20);
 								}}
-								class="rounded-default flex w-full items-center justify-center gap-2 border-2 border-gray-400 bg-gray-400/10 p-2 text-lg font-bold"
+								class="rounded-default flex w-full items-center justify-center gap-2 border-2 bg-gray-400/10 p-2 text-lg font-bold"
 								><Plus size={20} />New Item</button
 							>{/if}
 					</div>

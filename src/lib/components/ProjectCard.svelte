@@ -48,7 +48,7 @@
 	}}
 	in:fade={{ duration: 150 }}
 	out:fade={{ duration: 150 }}
-	class="rounded-default w-full cursor-move border-2 border-gray-400 bg-gray-400/10 p-4 text-left transition-all duration-200"
+	class="rounded-default w-full cursor-move border-2 bg-gray-400/10 p-4 text-left transition-all duration-200"
 >
 	<div class="group flex flex-col gap-2">
 		{#if !edit}

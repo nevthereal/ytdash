@@ -51,7 +51,7 @@
 		"@neondatabase/serverless": "^0.10.4",
 		"@nevthereal/random-utils": "^1.0.11",
 		"@thisux/sveltednd": "^0.0.20",
-		"better-auth": "^1.1.21",
+		"better-auth": "^1.2.1",
 		"drizzle-orm": "^0.38.4",
 		"lucide-svelte": "^0.475.0"
 	}

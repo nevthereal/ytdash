@@ -12,25 +12,6 @@ export const auth = betterAuth({
 			clientId: GH_CLIENT_ID,
 			clientSecret: GH_CLIENT_SECRET
 		}
-	},
-	user: {
-		additionalFields: {
-			role: {
-				type: 'string',
-				input: true,
-				required: false
-			},
-			admin: {
-				type: 'boolean',
-				defaultValue: false,
-				input: false
-			},
-			gender: {
-				type: 'string',
-				input: true,
-				required: false
-			}
-		}
 	}
 });
 

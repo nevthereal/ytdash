@@ -18,17 +18,14 @@ importers:
         specifier: ^0.0.20
         version: 0.0.20(svelte@5.20.2)
       better-auth:
-        specifier: ^1.1.21
-        version: 1.1.21
+        specifier: ^1.2.1
+        version: 1.2.1(typescript@5.7.3)
       drizzle-orm:
         specifier: ^0.38.4
         version: 0.38.4(@neondatabase/serverless@0.10.4)(@types/pg@8.11.6)(kysely@0.27.5)
       lucide-svelte:
         specifier: ^0.475.0
         version: 0.475.0(svelte@5.20.2)
-      mode-watcher:
-        specifier: ^0.5.1
-        version: 0.5.1(svelte@5.20.2)
     devDependencies:
       '@eslint/compat':
         specifier: ^1.2.5
@@ -138,8 +135,8 @@ packages:
   '@better-auth/utils@0.2.3':
     resolution: {integrity: sha512-Ap1GaSmo6JYhJhxJOpUB0HobkKPTNzfta+bLV89HfpyCAHN7p8ntCrmNFHNAVD0F6v0mywFVEUg1FUhNCc81Rw==}
 
-  '@better-fetch/fetch@1.1.12':
-    resolution: {integrity: sha512-B3bfloI/2UBQWIATRN6qmlORrvx3Mp0kkNjmXLv0b+DtbtR+pP4/I5kQA/rDUv+OReLywCCldf6co4LdDmh8JA==}
+  '@better-fetch/fetch@1.1.15':
+    resolution: {integrity: sha512-0Bl8YYj1f8qCTNHeSn5+1DWv2hy7rLBrQ8rS8Y9XYloiwZEfc3k4yspIG0llRxafxqhGCwlGRg+F8q1HZRCMXA==}
 
   '@drizzle-team/brocli@0.10.2':
     resolution: {integrity: sha512-z33Il7l5dKjUgGULTqBsQBQwckHh5AbIuxhdsIxDDiZAzBOrZO6q9ogcWC65kU382AfynTfgNumVcNIjuIua6w==}
@@ -1186,11 +1183,11 @@ packages:
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
 
-  better-auth@1.1.21:
-    resolution: {integrity: sha512-scyrQn8O9XL4oKmTt7nnA50P0v0RnI39yKevlMa0mI3646hXq/QOThjUrYy+cYCoq4tNLVsctQa9yUUMN9ZzhA==}
+  better-auth@1.2.1:
+    resolution: {integrity: sha512-ehECh654Y32pseRiAwHiDdqemCX5oM/B/N52heqVcRbgiVKC61FgdrBwBkQb9jV2jBk7E+C8iDZ5Nqshck3O1g==}
 
-  better-call@0.3.3:
-    resolution: {integrity: sha512-N4lDVm0NGmFfDJ0XMQ4O83Zm/3dPlvIQdxvwvgSLSkjFX5PM4GUYSVAuxNzXN27QZMHDkrJTWUqxBrm4tPC3eA==}
+  better-call@1.0.3:
+    resolution: {integrity: sha512-DUKImKoDIy5UtCvQbHTg0wuBRse6gu1Yvznn7+1B3I5TeY8sclRPFce0HI+4WF2bcb+9PqmkET8nXZubrHQh9A==}
 
   bindings@1.5.0:
     resolution: {integrity: sha512-p2q/t/mhvuOj/UeLlV6566GD/guowlr0hHxClI0W9m7MWYkL1F0hLo+0Aexs9HSPCtR1SXQ0TD3MMKrXZajbiQ==}
@@ -1855,11 +1852,6 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
-  mode-watcher@0.5.1:
-    resolution: {integrity: sha512-adEC6T7TMX/kzQlaO/MtiQOSFekZfQu4MC+lXyoceQG+U5sKpJWZ4yKXqw846ExIuWJgedkOIPqAYYRk/xHm+w==}
-    peerDependencies:
-      svelte: ^4.0.0 || ^5.0.0-next.1
-
   mri@1.2.0:
     resolution: {integrity: sha512-tzzskb3bG8LvYGFF/mDTpq3jpI6Q9wc3LEmBaghu+DdCssd1FakN7Bc0hVNmEyGq1bq3RgfkCb3cmQLpNPOroA==}
     engines: {node: '>=4'}
@@ -2372,6 +2364,14 @@ packages:
       typescript:
         optional: true
 
+  valibot@1.0.0-beta.15:
+    resolution: {integrity: sha512-BKy8XosZkDHWmYC+cJG74LBzP++Gfntwi33pP3D3RKztz2XV9jmFWnkOi21GoqARP8wAWARwhV6eTr1JcWzjGw==}
+    peerDependencies:
+      typescript: '>=5'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+
   validator@13.12.0:
     resolution: {integrity: sha512-c1Q0mCiPlgdTVVVIJIrBuxNicYE+t/7oKeI9MWLj3fh/uq2Pxh/3eeWbVZ4OcGW1TUf53At0njHw5SMdA3tmMg==}
     engines: {node: '>= 0.10'}
@@ -2507,7 +2507,7 @@ snapshots:
     dependencies:
       uncrypto: 0.1.3
 
-  '@better-fetch/fetch@1.1.12': {}
+  '@better-fetch/fetch@1.1.15': {}
 
   '@drizzle-team/brocli@0.10.2': {}
 
@@ -3390,27 +3390,30 @@ snapshots:
 
   balanced-match@1.0.2: {}
 
-  better-auth@1.1.21:
+  better-auth@1.2.1(typescript@5.7.3):
     dependencies:
       '@better-auth/utils': 0.2.3
-      '@better-fetch/fetch': 1.1.12
+      '@better-fetch/fetch': 1.1.15
       '@noble/ciphers': 0.6.0
       '@noble/hashes': 1.7.1
       '@simplewebauthn/browser': 13.1.0
       '@simplewebauthn/server': 13.1.1
-      better-call: 0.3.3
+      better-call: 1.0.3
       defu: 6.1.4
       jose: 5.10.0
       kysely: 0.27.5
       nanostores: 0.11.4
+      valibot: 1.0.0-beta.15(typescript@5.7.3)
       zod: 3.24.2
+    transitivePeerDependencies:
+      - typescript
 
-  better-call@0.3.3:
+  better-call@1.0.3:
     dependencies:
-      '@better-fetch/fetch': 1.1.12
+      '@better-fetch/fetch': 1.1.15
       rou3: 0.5.1
+      set-cookie-parser: 2.7.1
       uncrypto: 0.1.3
-      zod: 3.24.2
 
   bindings@1.5.0:
     dependencies:
@@ -4041,10 +4044,6 @@ snapshots:
 
   mkdirp@3.0.1: {}
 
-  mode-watcher@0.5.1(svelte@5.20.2):
-    dependencies:
-      svelte: 5.20.2
-
   mri@1.2.0: {}
 
   mrmime@2.0.1: {}
@@ -4488,6 +4487,10 @@ snapshots:
     optionalDependencies:
       typescript: 5.7.3
     optional: true
+
+  valibot@1.0.0-beta.15(typescript@5.7.3):
+    optionalDependencies:
+      typescript: 5.7.3
 
   validator@13.12.0:
     optional: true
