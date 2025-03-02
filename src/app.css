@@ -7,7 +7,7 @@
 	--color-scrap: hsl(0, 100%, 67%, 0.25);
 	--color-rerecord: hsl(300, 100%, 72%, 0.25);
 
-	--radius-default: 4rem;
+	--radius-default: 1rem;
 }
 
 @utility no-scrollbar {

@@ -113,8 +113,8 @@
 										newInput.focus();
 									}, 20);
 								}}
-								class="rounded-default flex w-full justify-center gap-2 border p-4 font-bold text-black"
-								><Plus />New Item</button
+								class="rounded-default flex w-full items-center justify-center gap-2 border-2 border-gray-400 bg-gray-400/10 p-2 text-lg font-bold"
+								><Plus size={20} />New Item</button
 							>{/if}
 					</div>
 				</div>

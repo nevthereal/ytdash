@@ -53,7 +53,6 @@
 		"@thisux/sveltednd": "^0.0.20",
 		"better-auth": "^1.1.21",
 		"drizzle-orm": "^0.38.4",
-		"lucide-svelte": "^0.475.0",
-		"mode-watcher": "^0.5.1"
+		"lucide-svelte": "^0.475.0"
 	}
 }
