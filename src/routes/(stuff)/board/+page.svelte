@@ -61,16 +61,16 @@
 			<div class="w-80 flex-none">
 				<div
 					class={cn(
-						'rounded-default no-scrollbar overflow-scroll border-2 p-4',
+						'no-scrollbar overflow-scroll rounded-2xl border-2 p-4',
 						status === 'todo'
-							? 'bg-todo'
+							? 'bg-todo/35'
 							: status === 're-record'
-								? 'bg-rerecord'
+								? 'bg-rerecord/35'
 								: status === 'in-progress'
-									? 'bg-inprogress'
+									? 'bg-inprogress/35'
 									: status === 'done'
-										? 'bg-done'
-										: 'bg-scrap'
+										? 'bg-done/35'
+										: 'bg-scrap/35'
 					)}
 					use:droppable={{
 						// The container is the status of the task. e.g. 'todo', 'in-progress', 'done'
@@ -99,7 +99,7 @@
 										bind:this={newInput}
 										{...$constraints.title}
 										bind:value={$form.title}
-										class="rounded-default w-full border-2 bg-gray-400/10 p-4 text-xl font-bold"
+										class="w-full rounded-2xl border-2 bg-gray-400/10 p-4 text-xl font-bold"
 										type="text"
 										name="title"
 										placeholder="New Project"
@@ -113,7 +113,7 @@
 										newInput.focus();
 									}, 20);
 								}}
-								class="rounded-default flex w-full items-center justify-center gap-2 border-2 bg-gray-400/10 p-2 text-lg font-bold"
+								class="flex w-full items-center justify-center gap-2 rounded-2xl border-2 bg-gray-400/10 p-2 text-lg font-bold"
 								><Plus size={20} />New Item</button
 							>{/if}
 					</div>
