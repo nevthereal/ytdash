@@ -50,18 +50,18 @@
 	let newInput = $state() as HTMLInputElement;
 </script>
 
-<section class="overflow-x-scroll">
+<section class="no-scrollbar overflow-x-scroll">
 	<div class="mb-4">
 		<h1 class="text-2xl font-bold">Board View</h1>
 		<p>Drag and drop projects between columns to reorder them in the board.</p>
 	</div>
 
-	<div class="flex gap-6 overflow-x-auto p-2">
+	<div class="no-scrollbar flex gap-6 p-2">
 		{#each projectsByStatus as { status, items: projects }}
 			<div class="w-80 flex-none">
 				<div
 					class={cn(
-						'rounded-default overflow-scroll border-2 p-4',
+						'rounded-default no-scrollbar overflow-scroll border-2 p-4',
 						status === 'todo'
 							? 'bg-todo'
 							: status === 're-record'

@@ -18,6 +18,6 @@
 		>
 	{/if}
 </nav>
-<main class="no-scrollbar px-8">
+<main class="px-8">
 	{@render children()}
 </main>
