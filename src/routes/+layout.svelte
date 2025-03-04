@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { authClient } from '$lib/auth/client';
+	import { LogOut } from 'lucide-svelte';
 	import '../app.css';
+	import { goto } from '$app/navigation';
 
 	let { children, data } = $props();
 </script>
@@ -12,9 +14,10 @@
 		<button
 			onclick={async () => {
 				await authClient(page.url.origin).signOut();
-				location.reload();
+				goto('/');
 			}}
-			class="rounded-lg border-2 p-1">Sign Out</button
+			class="flex items-center gap-2 rounded-lg border-2 p-2 text-sm font-bold"
+			><LogOut size={20} /> Sign Out</button
 		>
 	{/if}
 </nav>
