@@ -9,7 +9,7 @@
 
 	interface Props {
 		prj: Project;
-		status: (typeof projectStatusEnum.enumValues)[number];
+		status: (typeof projectStatusEnum)[number];
 		editForm: SuperValidated<Infer<typeof zNewProject>>;
 	}
 

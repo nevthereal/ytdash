@@ -9,7 +9,7 @@ export const POST: RequestHandler = async ({ url }) => {
 
 	if (Number.isNaN(projectId)) return error(400, 'Number not provided');
 
-	const target = url.searchParams.get('target') as (typeof projectStatusEnum.enumValues)[number];
+	const target = url.searchParams.get('target') as (typeof projectStatusEnum)[number];
 
 	await db
 		.update(project)

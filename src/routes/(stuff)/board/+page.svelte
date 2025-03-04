@@ -11,7 +11,7 @@
 
 	const { projects, editProjectForm } = $derived(data);
 
-	const statusValues = projectStatusEnum.enumValues;
+	const statusValues = projectStatusEnum;
 
 	const columns = statusValues;
 	const projectsByStatus = $derived(
@@ -62,13 +62,13 @@
 				<div
 					class={cn(
 						'no-scrollbar overflow-scroll rounded-2xl border-2 p-4',
-						status === 'todo'
+						status === 'To Do'
 							? 'bg-todo/35'
-							: status === 're-record'
+							: status === 'Re Record'
 								? 'bg-rerecord/35'
-								: status === 'in-progress'
+								: status === 'In Progress'
 									? 'bg-inprogress/35'
-									: status === 'done'
+									: status === 'Done'
 										? 'bg-done/35'
 										: 'bg-scrap/35'
 					)}
@@ -81,7 +81,7 @@
 				>
 					<div class="mb-4 flex items-center justify-between">
 						<h2 class="font-semibold capitalize">
-							{status.replace('-', ' ')}
+							{status}
 						</h2>
 						<span class="px-2.5 py-0.5 text-sm">
 							{projects.length}
@@ -92,9 +92,9 @@
 						{#each projects as prj (prj.id)}
 							<ProjectCard editForm={editProjectForm} {prj} {status} />
 						{/each}
-						{#if status === 'todo'}
+						{#if status === 'To Do'}
 							{#if newItem}
-								<form action="/?/new" id="new-form" use:enhance method="post">
+								<form action="?/new" id="new-form" use:enhance method="post">
 									<input
 										bind:this={newInput}
 										{...$constraints.title}

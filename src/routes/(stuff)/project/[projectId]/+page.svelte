@@ -16,16 +16,16 @@
 <p
 	class={cn(
 		'w-fit rounded-full px-2 py-1 capitalize',
-		project.status === 'todo'
+		project.status === 'To Do'
 			? 'bg-todo/50'
-			: project.status === 're-record'
+			: project.status === 'Re Record'
 				? 'bg-rerecord/50'
-				: project.status === 'in-progress'
+				: project.status === 'In Progress'
 					? 'bg-inprogress/50'
-					: project.status === 'done'
+					: project.status === 'Done'
 						? 'bg-done/50'
 						: 'bg-scrap/50'
 	)}
 >
-	{project.status.replace('-', ' ')}
+	{project.status}
 </p>

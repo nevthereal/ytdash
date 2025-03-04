@@ -11,5 +11,5 @@ export default defineConfig({
 
 	verbose: true,
 	strict: true,
-	dialect: 'postgresql'
+	dialect: 'turso'
 });
